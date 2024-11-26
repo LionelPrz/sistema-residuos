@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="./style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Residuos</title>
+</head>
+<body>
+    <header>
+        <nav class="nav-container">
+            <h3 class="nav-title">Que onda</h3>
+            <p class="nav-sub-title">Hola Pibe</p>
+        </nav>
+    </header>
+    <main>
+        <form class="main-form" action="main.php" enctype="multipart/form-data">
+            <label for="nombre">Ingrese su nombre</label>
+            <input type="text" name="nombre" id="nombre">
+            <label for="apellido">Ingrese su apellido</label>
+            <input type="text" name="apellido" id="apellido">
+            <label for="select-residuo">Seleccione el tipo de residuo</label>
+            <select name="select-residuo" id="sResiduo" value="Tipo residuo">
+                <option value="microbasural">Microbasural</option>
+                <option value="macrobasural">Macrobasural</option>
+                <option value="basuralmunicipal">Basural Municipal</option>
+            </select>
+            <label for="latitud">Ingrese su latitud actual</label>
+                <input type="tel" name="latitud">
+            <label for="longitud">Ingrese su longitud actual</label>
+                <input type="tel" name="longitud">
+            <label for="textarea">Ingrese los detalles del sitio</label>
+            <textarea name="textarea" id="text-area"></textarea>
+        </form>
+    </main>
+    <footer>
+        <section class="footer-section">
+            <h4 class="footer-main-text">No se master mi existencia es transitoria</h4>
+            <p class="footer-sub-text">El copy papi tiene que ser eterno</p>
+        </section>
+    </footer>
+
+    <script src="./app.js"></script>
+</body>
+</html>
