@@ -36,7 +36,7 @@
             </div>
             <!-- Grupo DNI -->
             <div class="formulario__grupo" id="grupo__dni">
-                <label for="nombre" class="formulario__label">DNI</label>
+                <label for="dni" class="formulario__label">DNI</label>
                 <div class="formulario__grupo-input">
                     <input type="tel" class="formulario__input" name="dni" id="dni" placeholder="DNI">
                     <i class="formulario__validacion-estado fas fa-times-circle"></i>
@@ -45,7 +45,7 @@
             </div> 
             <!-- Grupo Residuo -->
             <div class="formulario__grupo" id="grupo__residuo">
-                <label for="nombre" class="formulario__label">Tipo de residuo</label>
+                <label for="residuo" class="formulario__label">Tipo de residuo</label>
                 <div class="formulario__grupo-input">
                     <select class="formulario__input" name="residuo" id="residuo"></select>
                     <i class="formulario__validacion-estado fas fa-times-circle"></i>
@@ -54,27 +54,27 @@
             </div>
             <!-- Grupo Latitud -->
             <div class="formulario__grupo" id="grupo__latitud">
-                <label for="nombre" class="formulario__label">Latitud</label>
+                <label for="lat" class="formulario__label">Latitud</label>
                 <div class="formulario__grupo-input">
-                    <input id="lat" placeholder="Latitud" class="formulario__input" type="number" name="latitud">
+                    <input name="latitud" id="lat" placeholder="Latitud" class="formulario__input" type="text">
                     <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
                 <p class="formulario__input-error">Ingrese su latitud !</p>
             </div>
             <!-- Grupo Longitud -->
             <div class="formulario__grupo" id="grupo__longitud">
-                <label for="nombre" class="formulario__label">Longitud</label>
+                <label for="long" class="formulario__label">Longitud</label>
                 <div class="formulario__grupo-input">
-                    <input id="long" placeholder="Longitud" class="formulario__input" type="number" name="longitud">
+                    <input id="long" placeholder="Longitud" class="formulario__input" type="text" name="longitud">
                     <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
                 <p class="formulario__input-error">Ingrese su longitud !</p>
             </div>
             <!-- Grupo TextArea -->
-            <div class="formulario__grupo" id="grupo__textarea">
-                <label for="nombre" class="formulario__label">Tipo de residuo</label>
+            <div class="formulario__grupo" id="grupo__texto">
+                <label for="texto" class="formulario__label">Tipo de residuo</label>
                 <div class="formulario__grupo-input">
-                    <textarea placeholder="Detalles" class="textarea formulario__input" name="textarea" id="text-area"></textarea>
+                    <textarea placeholder="Detalles" maxlength="250" class="textarea formulario__input" name="texto" id="texto"></textarea>
                     <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
                 <p class="formulario__input-error">El texto solo puede contener letras, acentos y numeros !</p>
