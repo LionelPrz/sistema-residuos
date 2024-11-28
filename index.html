@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="./style.css">
@@ -15,22 +15,28 @@
     </header>
     <main>
         <form class="main-form" action="main.php" enctype="multipart/form-data">
-            <label for="nombre">Ingrese su nombre</label>
-            <input type="text" name="nombre" id="nombre">
-            <label for="apellido">Ingrese su apellido</label>
-            <input type="text" name="apellido" id="apellido">
-            <label for="select-residuo">Seleccione el tipo de residuo</label>
-            <select name="select-residuo" id="sResiduo" value="Tipo residuo">
-                <option value="microbasural">Microbasural</option>
-                <option value="macrobasural">Macrobasural</option>
-                <option value="basuralmunicipal">Basural Municipal</option>
-            </select>
-            <label for="latitud">Ingrese su latitud actual</label>
-                <input type="tel" name="latitud">
-            <label for="longitud">Ingrese su longitud actual</label>
-                <input type="tel" name="longitud">
-            <label for="textarea">Ingrese los detalles del sitio</label>
-            <textarea name="textarea" id="text-area"></textarea>
+            <label class="form-label" for="nombre">Ingrese su nombre</label>
+                <input placeholder="Nombre" class="form-input" type="text" name="nombre" id="nombre">
+            
+            <label class="form-label" for="apellido">Ingrese su apellido</label>
+                <input placeholder="Apellido" class="form-input" type="text" name="apellido" id="apellido">
+
+            <label class="form-label" for="dni">Ingrese su dni</label>
+                <input placeholder="DNI" class="form-input" type="tel" name="dni" id="dni">
+            
+            <label class="form-label" for="select-residuo">Seleccione el tipo de residuo</label>
+                <select class="form-select" name="select-residuo" id="sResiduo"></select>
+            
+            <label class="form-label" for="latitud">Ingrese su latitud actual</label>
+                <input id="lat" placeholder="Latitud" class="form-input" type="tel" name="latitud">
+
+            <label class="form-label" for="longitud">Ingrese su longitud actual</label>
+                <input id="long" placeholder="Longitud" class="form-input" type="tel" name="longitud">
+            
+            <label class="form-label" for="textarea">Ingrese los detalles del sitio</label>
+                <textarea placeholder="Detalles" class="form-textarea" name="textarea" id="text-area"></textarea>
+            <br>
+                <button type="submit" class="form-btn" id="form-s-btn">Enviar Informe</button>
         </form>
     </main>
     <footer>
