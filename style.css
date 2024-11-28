@@ -74,8 +74,8 @@ footer{
 .form-textarea{
     padding: .2rem;
     border-radius: 5px;
-    resize: none;
-    height: 250px;
+
+    height: 300px;
     width: 100%;
 }
 .form-btn{

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<DOCTYPE html>
 <html lang="en">
 <head>
     <link rel="stylesheet" href="./style.css">
@@ -20,18 +20,18 @@
             
             <label class="form-label" for="apellido">Ingrese su apellido</label>
                 <input placeholder="Apellido" class="form-input" type="text" name="apellido" id="apellido">
+
+            <label class="form-label" for="dni">Ingrese su dni</label>
+                <input placeholder="DNI" class="form-input" type="tel" name="dni" id="dni">
             
             <label class="form-label" for="select-residuo">Seleccione el tipo de residuo</label>
-                <select class="form-select" name="select-residuo" id="sResiduo" value="Tipo residuo">
-                    <option disabled selected>Tipo de Residuo</option>
-                    <option value="Macrobasural">Macrobasural</option>
-                    <option value="Basural Municipal">Basural Municipal</option>
-                </select>
-            <label class="form-label" for="latitud">Ingrese su latitud actual</label>
-                <input placeholder="Latitud" class="form-input" type="tel" name="latitud">
+                <select class="form-select" name="select-residuo" id="sResiduo"></select>
             
+            <label class="form-label" for="latitud">Ingrese su latitud actual</label>
+                <input id="lat" placeholder="Latitud" class="form-input" type="tel" name="latitud">
+
             <label class="form-label" for="longitud">Ingrese su longitud actual</label>
-                <input placeholder="Longitud" class="form-input" type="tel" name="longitud">
+                <input id="long" placeholder="Longitud" class="form-input" type="tel" name="longitud">
             
             <label class="form-label" for="textarea">Ingrese los detalles del sitio</label>
                 <textarea placeholder="Detalles" class="form-textarea" name="textarea" id="text-area"></textarea>
