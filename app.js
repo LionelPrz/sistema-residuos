@@ -16,14 +16,16 @@ const campos = {
     nombre: false,
     apellido: false,
     dni: false,
-    texto: false
+    texto: false,
+    latitud:false,
+    longitud:false,
+    residuo:false
 }
-
 
 form.addEventListener('submit',(e)=>{
     e.preventDefault();
 
-    if(campos.nombre && campos.apellido && campos.dni && campos.texto){
+    if(campos.nombre && campos.apellido && campos.dni && campos.texto && campos.latitud && campos.longitud && campos.residuo){
         form.reset();
 
         document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
@@ -34,7 +36,6 @@ form.addEventListener('submit',(e)=>{
 		document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
 			icono.classList.remove('formulario__grupo-correcto');
 		});
-        form.submit();
 	} 
     else {
 		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
@@ -45,6 +46,7 @@ form.addEventListener('submit',(e)=>{
 inputs.forEach((input)=>{
     input.addEventListener('keyup',validarFormulario);
     input.addEventListener('blur',validarFormulario);
+    input.addEventListener('change',validarFormulario);
 })
 
 form.addEventListener('click',()=>{
@@ -94,6 +96,14 @@ function validarFormulario(e){
         case "textarea":
             validarCampo(expresiones.textarea,e.target,'textarea');
         break;
+        // case "latitud":
+        //     validarCampo(expresiones.latitud,e.target,'latitud');
+        // break;
+        // case "longitud":
+        //     validarCampo(expresiones.longitud,e.target,'longitud');
+        // break;
+        case "residuo":
+            validarCampo(expresiones.residuo,e.target,'residuo');
     }
 }
 
