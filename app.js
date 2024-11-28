@@ -1,9 +1,9 @@
-let form = document.querySelector(".main-form");
-let selectD = document.getElementById("sResiduo");
+let form = document.querySelector(".formulario");
+let selectD = document.getElementById("residuo");
 let ejecicion = false;
 let ilat = document.getElementById("lat");
 let ilong = document.getElementById("long");
-let inputs = document.querySelectorAll('#main-form input,select,textarea');
+let inputs = document.querySelectorAll('#formulario input,select,textarea');
 
 const expresiones = {
 	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -34,6 +34,7 @@ form.addEventListener('submit',(e)=>{
 		document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
 			icono.classList.remove('formulario__grupo-correcto');
 		});
+        form.submit();
 	} 
     else {
 		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
