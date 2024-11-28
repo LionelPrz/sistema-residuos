@@ -7,95 +7,95 @@
     <title>Sistema de Residuos</title>
 </head>
 <body>
-    <header>
-        <nav class="nav-container">
-            <h3 class="nav-title">Que onda</h3>
-            <p class="nav-sub-title">Hola Pibe</p>
-        </nav>
-    </header>
-    <main>
-        <form action="./main.php" class="formulario" id="formulario" method="post">
-            <!-- Grupo Nombre -->
-        <div class="formulario__grupo" id="grupo__nombre">
-            <label for="nombre" class="formulario__label">Nombre</label>
-            <div class="formulario__grupo-input">
-                <input type="text" class="formulario__input" name="nombre" id="nombre" placeholder="Nombre">
-                <i class="formulario__validacion-estado fas fa-times-circle"></i>
+    <div class="container">
+        <header>
+            <nav class="nav-container">
+                <h3 class="nav-title">Que onda</h3>
+                <p class="nav-sub-title">Hola Pibe</p>
+            </nav>
+        </header>
+        <main>
+            <form action="./main.php" class="formulario" id="formulario" method="post">
+                <!-- Grupo Nombre -->
+            <div class="formulario__grupo" id="grupo__nombre">
+                <label for="nombre" class="formulario__label">Nombre</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="nombre" id="nombre" placeholder="Nombre">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">El nombre solo puede contenener letras, acentos y espacios !</p>
             </div>
-            <p class="formulario__input-error">El nombre solo puede contenener letras, acentos y espacios !</p>
-        </div>
-        <!-- Grupo Apellido -->
-        <div class="formulario__grupo" id="grupo__apellido">
-            <label for="apellido" class="formulario__label">Apellido</label>
-            <div class="formulario__grupo-input">
-                <input type="text" class="formulario__input" name="apellido" id="apellido" placeholder="Apellido">
-                <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            <!-- Grupo Apellido -->
+            <div class="formulario__grupo" id="grupo__apellido">
+                <label for="apellido" class="formulario__label">Apellido</label>
+                <div class="formulario__grupo-input">
+                    <input type="text" class="formulario__input" name="apellido" id="apellido" placeholder="Apellido">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">El apellido solo puede contenener letras, acentos y espacios !</p>
             </div>
-            <p class="formulario__input-error">El apellido solo puede contenener letras, acentos y espacios !</p>
-        </div>
-        <!-- Grupo DNI -->
-        <div class="formulario__grupo" id="grupo__dni">
-            <label for="nombre" class="formulario__label">DNI</label>
-            <div class="formulario__grupo-input">
-                <input type="tel" class="formulario__input" name="dni" id="dni" placeholder="DNI">
-                <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            <!-- Grupo DNI -->
+            <div class="formulario__grupo" id="grupo__dni">
+                <label for="dni" class="formulario__label">DNI</label>
+                <div class="formulario__grupo-input">
+                    <input type="tel" class="formulario__input" name="dni" id="dni" placeholder="DNI">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">El DNI solo puede contener hasta 8 numeros sin puntos ni espacios !</p>
+            </div> 
+            <!-- Grupo Residuo -->
+            <div class="formulario__grupo" id="grupo__residuo">
+                <label for="residuo" class="formulario__label">Tipo de residuo</label>
+                <div class="formulario__grupo-input">
+                    <select class="formulario__input" name="residuo" id="residuo"></select>
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Por favor seleccione un tipo de residuo!</p>
             </div>
-            <p class="formulario__input-error">El DNI solo puede contener hasta 8 numeros sin puntos ni espacios !</p>
-        </div> 
-        <!-- Grupo Residuo -->
-        <div class="formulario__grupo" id="grupo__residuo">
-            <label for="nombre" class="formulario__label">Tipo de residuo</label>
-            <div class="formulario__grupo-input">
-                <select class="formulario__input" name="residuo" id="residuo"></select>
-                <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            <!-- Grupo Latitud -->
+            <div class="formulario__grupo" id="grupo__latitud">
+                <label for="lat" class="formulario__label">Latitud</label>
+                <div class="formulario__grupo-input">
+                    <input name="latitud" id="lat" placeholder="Latitud" class="formulario__input" type="text">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Ingrese su latitud !</p>
             </div>
-            <p class="formulario__input-error">Por favor seleccione un tipo de residuo!</p>
-        </div>
-        <!-- Grupo Latitud -->
-        <div class="formulario__grupo" id="grupo__latitud">
-            <label for="nombre" class="formulario__label">Latitud</label>
-            <div class="formulario__grupo-input">
-                <input id="lat" placeholder="Latitud" class="formulario__input" type="number" name="latitud">
-                <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            <!-- Grupo Longitud -->
+            <div class="formulario__grupo" id="grupo__longitud">
+                <label for="long" class="formulario__label">Longitud</label>
+                <div class="formulario__grupo-input">
+                    <input id="long" placeholder="Longitud" class="formulario__input" type="text" name="longitud">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Ingrese su longitud !</p>
             </div>
-            <p class="formulario__input-error">Ingrese su latitud !</p>
-        </div>
-        <!-- Grupo Longitud -->
-        <div class="formulario__grupo" id="grupo__longitud">
-            <label for="nombre" class="formulario__label">Longitud</label>
-            <div class="formulario__grupo-input">
-                <input id="long" placeholder="Longitud" class="formulario__input" type="number" name="longitud">
-                <i class="formulario__validacion-estado fas fa-times-circle"></i>
+            <!-- Grupo TextArea -->
+            <div class="formulario__grupo" id="grupo__texto">
+                <label for="texto" class="formulario__label">Tipo de residuo</label>
+                <div class="formulario__grupo-input">
+                    <textarea placeholder="Detalles" maxlength="250" class="textarea formulario__input" name="texto" id="texto"></textarea>
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">El texto solo puede contener letras, acentos y numeros !</p>
             </div>
-            <p class="formulario__input-error">Ingrese su longitud !</p>
-        </div>
-        <!-- Grupo TextArea -->
-        <div class="formulario__grupo" id="grupo__textarea">
-            <label for="nombre" class="formulario__label">Tipo de residuo</label>
-            <div class="formulario__grupo-input">
-                <textarea placeholder="Detalles" class="textarea formulario__input" name="textarea" id="text-area"></textarea>
-                <i class="formulario__validacion-estado fas fa-times-circle"></i>
-            </div>
-            <p class="formulario__input-error">El texto solo puede contener letras, acentos y numeros !</p>
-        </div>
-
-            <div class="formulario__mensaje" id="formulario__mensaje">
-                <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor rellena el formulario correctamente. </p>
-            </div>
-
-            <div class="formulario__grupo formulario__grupo-btn-enviar">
-                <button type="submit" class="formulario__btn">Enviar</button>
-                <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
-            </div>
-    </form>
-</main>
-    <footer>
-        <section class="footer-section">
+    
+                <div class="formulario__mensaje" id="formulario__mensaje">
+                    <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor rellena el formulario correctamente. </p>
+                </div>
+    
+                <div class="formulario__grupo formulario__grupo-btn-enviar">
+                    <button type="submit" class="formulario__btn">Enviar</button>
+                    <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
+                </div>
+        </form>
+    </main>
+        <footer class="footer-section">
             <h4 class="footer-main-text">No se master mi existencia es transitoria</h4>
             <p class="footer-sub-text">El copy papi tiene que ser eterno</p>
-        </section>
-    </footer>
-
-    <script src="./app.js"></script>
-    <script src="https://kit.fontawesome.com/2fe13f77ea.js" crossorigin="anonymous"></script></body>
+        </footer>
+    </div>
+        <script src="./app.js"></script>
+        <script src="https://kit.fontawesome.com/2fe13f77ea.js" crossorigin="anonymous"></script></body>
+</body>
 </html>

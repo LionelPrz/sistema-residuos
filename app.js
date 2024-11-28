@@ -9,7 +9,10 @@ const expresiones = {
 	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     dni: /^\d{8}$/, //8 numeros.
-    textarea: /^[a-zA-ZÀ-ÿ\s\d]{1,250}$/ //Letras y espacios, pueden llevar acentos y admite hasta 250 caracteres y numeros creo;
+    texto: /^[a-zA-ZÀ-ÿ0-9\s.,;!?(){}[\]'"-]{1,250}$/,  // Permite letras, números, espacios y signos de puntuación
+    residuo: /^(Microbasural|Macrobasural|Basural Municipal)$/, // Tres valores posibles.
+    latitud: /^-?([1-8]?[0-9](\.\d{1,6})?|90(\.0{1,6})?)$/,  // Latitud entre -90 y 90, hasta 6 decimales
+    longitud: /^-?((1[0-7][0-9]|[1-9]?[0-9])(\.\d{1,6})?|180(\.0{1,6})?)$/,  // Longitud entre -180 y 180, hasta 6 decimales
 }
 
 const campos = {
@@ -19,14 +22,15 @@ const campos = {
     texto: false,
     latitud:false,
     longitud:false,
-    residuo:false
+    residuo:false,
 }
 
 form.addEventListener('submit',(e)=>{
     e.preventDefault();
 
+    console.log(campos);
     if(campos.nombre && campos.apellido && campos.dni && campos.texto && campos.latitud && campos.longitud && campos.residuo){
-        form.reset();
+        // form.reset();
 
         document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
 		setTimeout(() => {
@@ -70,19 +74,18 @@ function obtenerUbicacion(){
         let longitude = position.coords.longitude;
     
         ilat.value = `${latitude}`;
-        ilat.disabled = true;
+        // ilat.disabled = true;
         ilong.value = `${longitude}`;
-        ilong.disabled = true;
+        // ilong.disabled = true;
 }
     function error(){
         alert("Error al Obtener la ubicacion");
     }
-
-
     navigator.geolocation.getCurrentPosition(success,error);
 }
 
 function validarFormulario(e){
+
     switch(e.target.name){
         case "nombre":
             validarCampo(expresiones.nombre,e.target,'nombre');
@@ -93,15 +96,15 @@ function validarFormulario(e){
         case "dni":
             validarCampo(expresiones.dni,e.target,'dni');
         break;
-        case "textarea":
-            validarCampo(expresiones.textarea,e.target,'textarea');
+        case "texto":
+            validarCampo(expresiones.texto,e.target,'texto');
         break;
-        // case "latitud":
-        //     validarCampo(expresiones.latitud,e.target,'latitud');
-        // break;
-        // case "longitud":
-        //     validarCampo(expresiones.longitud,e.target,'longitud');
-        // break;
+        case "latitud":
+            validarCampo(expresiones.latitud,e.target,'latitud');
+        break;
+        case "longitud":
+            validarCampo(expresiones.longitud,e.target,'longitud');
+        break;
         case "residuo":
             validarCampo(expresiones.residuo,e.target,'residuo');
     }
