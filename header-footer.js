@@ -27,7 +27,7 @@ window.addEventListener('load',()=>{
               temperatura.textContent = `${temp} ° C`;
           let desc = data.weather[0].description;
               descripcion.textContent = desc.toUpperCase();
-              ubicacion.textContent = data.name;
+              // ubicacion.textContent = data.name;
           
           // Iconos animados
           switch(data.weather[0].main){

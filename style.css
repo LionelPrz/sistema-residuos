@@ -41,9 +41,9 @@ footer{
 
 .header-icons-container{
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: space-between;
 	align-items: center;
-	height: 120px;
+	height: 180px;
 }
 
 
@@ -55,6 +55,18 @@ footer{
     width: 800px;
     gap: 12px;
 	border: 2px solid #264143;
+	box-shadow: 3px 4px 0px 1px #E99F4C;
+}
+
+.formulario__title{
+	font-size: 32px;
+	text-align: center;
+	padding: 1rem;
+	margin: 0 auto;
+	background-color: #F66060;
+	border-radius: 15px;
+	border: 2px solid #090909 ;
+	width: fit-content;
 	box-shadow: 3px 4px 0px 1px #E99F4C;
 }
 
@@ -188,7 +200,20 @@ footer{
 }
 
 /* Header Area */
+.header-title{
+	padding: .7rem;
 
+}
+
+.header-functions-container{
+	justify-content: flex-end;
+	display: flex;
+	gap: 30px;
+	padding: 1rem;
+	margin: .5rem;
+	width: 40%;
+	height: 100px;
+}
 .header img {
 	border-radius: 50%;
 	height: 50px;
@@ -198,10 +223,13 @@ footer{
   }
   
   .header-dark-theme {
+	padding: .5rem;
+	background-color: #264143;
+	border-radius: 25px;
 	display: flex; /* Usamos flexbox en cada uno de los contenedores */
 	align-items: center; /* Centrar verticalmente */
 	justify-content: center; /* Centrar horizontalmente */
-	width: 125px; /* Mantener el ancho consistente */
+	width: 135px; /* Mantener el ancho consistente */
 	height: 75px; /* Mantener la altura consistente */
 	font-family: -apple-system;
 	font-weight: bold;
@@ -209,9 +237,12 @@ footer{
   }
 
   .header-weather{
+	background-color: #090909;
+	border-radius: 25px;
+	padding: .5rem;
 	display: flex; /* Para alinear icono e información del clima en fila */
 	align-items: center; /* Centra verticalmente el icono y el texto */
-	width: 155px;
+	width: 140px;
 	height: 75px;
 	font-family: -apple-system;
 	font-weight: bold;
@@ -334,8 +365,6 @@ footer{
 	transform: translateX(100%);
 	box-shadow: inset 15px -4px 0px 15px #efdf2b, 0 0 10px 0px #efdf2b;
   }
-
-
 
 /* Estilos Restantes */
 

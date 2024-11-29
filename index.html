@@ -10,27 +10,33 @@
     <div class="container">
         <header>
             <div class="header-icons-container">
-              <div class="header-weather">
-                <span class="weather-icon">
-                    <img id="image" src="" alt="weather icon">
-                </span>
-                <div id="hola" class="weather-info">
-                    <h3 id="location" class="weather-location">a</h3>
-                    <h3 id="temperature" class="weather-temp">a</h3>
-                    <h3 id="description" class="weather-desc">a</h3>
+                <div class="header-title">
+                    <h1>Gestion Urbanistica</h1>
                 </div>
-            </div>     
-            <div class="header-dark-theme">
-                <p>Modo Oscuro</p>
-                <label id="theme-switch" for="switch" class="switch">
-                  <input id="switch" type="checkbox" />
-                  <span class="slider"></span>
-                  <span class="decoration"></span>
-                </label>
-              </div>          
+                <div class="header-functions-container">
+                    <div class="header-weather">
+                        <span class="weather-icon">
+                            <img id="image" src="" alt="weather icon">
+                        </span>
+                        <div id="weather-info" class="weather-info">
+                            <!-- <h3 id="location" class="weather-location">a</h3> -->
+                            <h3 id="temperature" class="weather-temp">a</h3>
+                            <h3 id="description" class="weather-desc">a</h3>
+                        </div>
+                    </div>     
+                    <div class="header-dark-theme">
+                        <p>Modo Oscuro</p>
+                        <label id="theme-switch" for="switch" class="switch">
+                          <input id="switch" type="checkbox" />
+                          <span class="slider"></span>
+                          <span class="decoration"></span>
+                        </label>
+                      </div> 
+                </div>
         </header>
         <main>
             <form action="./main.php" class="formulario" id="formulario" method="post">
+                    <h2 class="formulario__title">Formulario de carga de datos</h2>
                 <!-- Grupo Nombre -->
             <div class="formulario__grupo" id="grupo__nombre">
                 <label for="nombre" class="formulario__label">Nombre</label>
