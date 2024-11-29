@@ -1,5 +1,4 @@
 // variables para el dark mode
-
 let darkmode = localStorage.getItem('darkmode');
 const themeSwitch = document.getElementById('switch');
 const themeText = document.querySelector('.header-dark-theme p'); // Elemento de texto del modo
@@ -13,6 +12,9 @@ let lon = -58.65306;
 let lat =  -28.751389;
 let key = '9588893d32e1c6900e83cbb514ec110c';
 const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${key}&lang=es&units=metric`
+
+// variables para links en el footer
+let footerLink = document.querySelectorAll('#redes-cont > button');
 
 // Funcion para tener la aplicacion de clima en la app
 window.addEventListener('load',()=>{
@@ -67,6 +69,22 @@ window.addEventListener('load',()=>{
           console.log(error);
         })
     });
+
+    footerLink.forEach((button)=>{
+      button.addEventListener('click',agregarLink);
+    })
+
+function agregarLink(){
+  const links = {
+    facebook: `https://es-la.facebook.com/`,
+    instagram: `https://www.instagram.com/`,
+    whatsapp: `https://web.whatsapp.com/`
+  }
+  for (let i = 0; i <= links.length; i++) {
+    
+  }
+
+}
 
 // Modo oscuro usando local storage
 
