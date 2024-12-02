@@ -1,11 +1,76 @@
+/* Varibales de paleta de colores light mode*/
+:root {
+    /* Paleta general */
+	--app-background:#423b3b;
+	--color-shadow: rgba(0,0,0,0.1);
+	--toggle-background: #020202;
+    --color-primary: #88B04B; /* Verde musgo pastel */
+    --color-secondary: #A8D5BA; /* Verde menta suave */
+    --color-accent: #6C8E5D; /* Verde oliva apagado */
+    --color-background: #d8d8c1; /* Crema claro */
+    --color-text: #2C3E3D; /* Verde grisáceo oscuro */
+    --color-border: #D8E3D8; /* Verde pastel para bordes suaves */
+
+    /* Formulario */
+    --form-background: #F9F9F4; /* Fondo del formulario */
+    --form-title-text: #d9e8d3; /* Texto del título del formulario */
+    --form-title-background: #88B04B; /* Fondo del título del formulario */
+    --form-input-background: #FFFFFF; /* Fondo de los inputs */
+    --form-input-border: #D8E3D8; /* Bordes de los inputs */
+    --form-input-focus: #6C8E5D; /* Borde al enfocar */
+    --form-input-text: #2C3E3D; /* Texto en los inputs */
+
+    /* Botones */
+    --button-background: #88B04B; /* Fondo del botón */
+    --button-text: #FFFFFF; /* Texto del botón */
+    --button-hover: #6C8E5D; /* Fondo del botón al pasar el mouse */
+    --button-disabled: #D8E3D8; /* Fondo del botón deshabilitado */
+
+    /* Otros */
+    --header-footer-background: #88B04B; /* Fondo del header y footer */
+    --header-footer-text: #FFFFFF; /* Texto del header y footer */
+}
+
+.darkmode {
+    /* Paleta general */
+	--color-shadow: rgba(0,0,0,0.3);
+    --color-primary: #6C8E5D; /* Verde oliva apagado */
+    --color-secondary: #88B04B; /* Verde musgo pastel */
+    --color-accent: #A8D5BA; /* Verde menta suave */
+    --color-background: #1b2d24; /* Verde grisáceo oscuro */
+    --color-text: #e8f0e9; /* Texto blanco verdoso */
+    --color-border: #3a4e44; /* Bordes oscuros */
+
+    /* Formulario */
+    --form-background: #24272d; /* Fondo del formulario */
+    --form-title-text: #d9e8d3; /* Texto del título del formulario */
+    --form-title-background: #2e4a3c; /* Fondo del título del formulario */
+    --form-input-background: #1b2d24; /* Fondo de los inputs */
+    --form-input-border: #3a4e44; /* Bordes de los inputs */
+    --form-input-focus: #5e7f63; /* Borde al enfocar */
+    --form-input-text: #e8f0e9; /* Texto en los inputs */
+
+    /* Botones */
+    --button-background: #6C8E5D; /* Fondo del botón */
+    --button-text: #FFFFFF; /* Texto del botón */
+    --button-hover: #88B04B; /* Fondo del botón al pasar el mouse */
+    --button-disabled: #4A5D4B; /* Fondo del botón deshabilitado */
+
+    /* Otros */
+    --header-footer-background: #2C3E3D; /* Fondo del header y footer */
+    --header-footer-text: #E8F0E8; /* Texto del header y footer */
+}
+
 /* Estilos Escenciales */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+
 body{
-	background-color: antiquewhite;
+	background-color: var(--color-background);
+	color: var(--color-text);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .container{
@@ -15,9 +80,11 @@ body{
 }
 header{
     grid-area: 1/1/2/2;
-	background-color: #a45f32;
+	background-color: var(--header-footer-background);
+	color: var(--header-footer-text);
 	border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
+	box-shadow: 4px 4px 0px 1px var(--button-hover);
 }
 
 main{
@@ -26,13 +93,11 @@ main{
     margin: 1rem 0;
 	display: flex;
 	justify-content: center;
-	align-items: center;
 }
 footer{
     grid-area: 3/1/4/2;
-    background-color: #a45f32;
-    color: white;
-    text-align: center;
+	background-color: var(--header-footer-background);
+    color: var(--header-footer-text);
     padding: 1rem;
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
@@ -44,18 +109,19 @@ footer{
 	justify-content: space-between;
 	align-items: center;
 	height: 180px;
+	padding: .3rem;
 }
 
-
+/* Estilos de formulario */
 .formulario {
-    background-color: #EDDCD9;
+    background-color: var(--form-background);
     border-radius: 20px;
     padding: 2rem;
     display: grid;
     width: 800px;
     gap: 12px;
-	border: 2px solid #264143;
-	box-shadow: 3px 4px 0px 1px #E99F4C;
+	border: 2px solid var(--form-input-border);
+	box-shadow: 4px 4px 0px 1px var(--button-hover);
 }
 
 .formulario__title{
@@ -63,11 +129,11 @@ footer{
 	text-align: center;
 	padding: 1rem;
 	margin: 0 auto;
-	background-color: #F66060;
+	background-color: var(--form-title-background);
+	color: var(--form-title-text);
 	border-radius: 15px;
-	border: 2px solid #090909 ;
 	width: fit-content;
-	box-shadow: 3px 4px 0px 1px #E99F4C;
+	box-shadow: 3px 4px 0px 1px var(--button-hover);
 }
 
 .formulario__label {
@@ -77,14 +143,21 @@ footer{
 	cursor: pointer;
 }
 
+.formulario__label:hover{
+	color: var(--color-primary);
+	transition: .3s ease-in;
+}
+
 .formulario__grupo-input {
 	position: relative;
 }
 
 .formulario__input {
+	transition: all 0.2s ease;
 	outline: none;
 	width: 100%;
-	background: #fff;
+	background: var(--form-input-background);
+	color: var(--form-input-text);
 	border: 2px solid #264143;
 	border-radius: 4px;
 	font-size: 15px;
@@ -95,9 +168,22 @@ footer{
 }
 
 .formulario__input:focus {
-	border: 3px solid #5d9ad3;
+	border: 3px solid var(--form-input-focus);
 	outline: none;
 	box-shadow: 3px 0px 30px rgba(163,163,163, 0.4);
+}
+.fomrmulario__input:focus-visible{
+	outline: 3px solid
+	var(--color-primary);
+	box-shadow: 0 0 10px
+	var(--color-primary);
+}
+.formulario__input, .formulario__btn{
+	transition: all 0.3s ease-in-out;
+}
+.formulario__input::placeholder{
+	color: var(--color-shadow);
+	font-style: italic;
 }
 
 .formulario__input-error {
@@ -157,17 +243,22 @@ footer{
 	margin: 25px 0px;
 	width: 75%;
 	font-size: 15px;
-	background: #DE5499;
+	background: var(--button-background);
+	color: var(--button-text);
 	border-radius: 10px;
+	border: none;
 	font-weight: 800;
-	box-shadow: 3px 3px 0px 0px #E99F4C;
+	box-shadow: 3px 3px 0px 0px var(--button-hover);
 }
 
 .formulario__btn:hover {
-	transition: ease .5s;
+	background: #145214;
 	color: #f2f2f2;
-	/* box-shadow: 5px 0px 10px rgba(145,170,100, .5); */
-	opacity: .9;
+	box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+.formulario__btn:focus-visible{
+	outline: 3px solid
+	var(--color-primary);
 }
 
 .formulario__mensaje-exito {
@@ -224,7 +315,7 @@ footer{
   
   .header-dark-theme {
 	padding: .5rem;
-	background-color: #264143;
+	background-color: #2f2f2f;
 	border-radius: 25px;
 	display: flex; /* Usamos flexbox en cada uno de los contenedores */
 	align-items: center; /* Centrar verticalmente */
@@ -237,7 +328,7 @@ footer{
   }
 
   .header-weather{
-	background-color: #090909;
+	background-color: var(--app-background);
 	border-radius: 25px;
 	padding: .5rem;
 	display: flex; /* Para alinear icono e información del clima en fila */
@@ -308,14 +399,13 @@ footer{
   
   /* The slider */
   .slider {
-	--background: #20262c;
 	position: absolute;
 	cursor: pointer;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: var(--background);
+	background-color: var(--toggle-background);
 	transition: 0.5s;
 	border-radius: 30px;
   }
@@ -374,15 +464,14 @@ footer{
     border-radius: 5px;
     height: 250px;
     width: 100%;
+	transition: all 0.1s ease;
+	color: var(--color-text);
+	border: 2px solid var(--color-shadow);
 }
-.form-btn{
-    background-color: antiquewhite;
-    color: black;
-    height: 55px;
-    width: 80%;
-    text-align: center;
-    border-radius: 5px;
-    margin: 0 auto;
+
+.textarea:focus{
+	border-color: var(--color-primary);
+	box-shadow: 0 0 10px rgba(50,205,50,0.5);
 }
 
 .footer-main-text{
@@ -390,13 +479,17 @@ footer{
     font-size: 2rem;
     font-weight: bold;
 }
+
 .footer-sub-text{
-    text-align: center;
-    font-size: 1rem;
+	text-align: center;
+	margin-top: 0.5rem;
+	padding: .3rem;
+    font-size: 1.1rem;
     font-family: system-ui;
 }
 /* Contenedor SVG */
 .redes-container{
+
 	display: flex;
 	justify-content: space-evenly;
 	align-items: center;
@@ -406,27 +499,33 @@ footer{
 /* SVG estilizados */
 
 .button2 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	height: 40px;
 	transition: all 0.2s ease-in;
 	position: relative;
 	overflow: hidden;
 	z-index: 1;
-	color: #090909;
+	color: var(--button-text);
 	padding: 0.7em 3.3em 0.7em 1.9em;
 	font-size: 16px;
 	border-radius: 10px;
-	background: #e8e8e8;
-	border: 1px solid #e8e8e8;
+	background: var(--color-shadow);
+	border: none;
+	box-shadow: 3px 3px 0px 0px var(--button-hover);
   }
-  
-  .button2 > .svg {
-	height: 25px;
-	position: absolute;
-	padding: 0px 5px;
-	margin-top: -4px;
+
+  .button2 p {
+	padding: .4rem;
   }
-  
+  .fa-brands i{
+	width: 30px;
+	height: 35px;
+  }
+
   .button2:active {
+	transform: scale(0.95);
 	color: #666;
 	box-shadow: inset 4px 4px 12px #c5c5c5,
 			   inset -4px -4px 12px #ffffff;
@@ -463,6 +562,7 @@ footer{
   }
   
 .button2:hover {
+	transform: scale(1.05);
 	color: #ffffff;
 	border: 1px solid #25D366;
   }
@@ -540,9 +640,24 @@ footer{
 	}
 	.button2{
 		padding: .5rem;
-		width: 80%;
+		width: 60%;
 	}
 	.footer-main-text{
 		padding: 1rem;
+	}
+	.header-icons-container{
+		justify-content: center;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	.header-functions-container{
+		justify-content: center;
+	}
+	.footer-sub-text{	
+		margin-top: 0.5rem;
+		padding: .3rem;
+		text-align: center;
+		font-size: 1rem;
+		font-family: system-ui;
 	}
 }
