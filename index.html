@@ -35,7 +35,7 @@
                 </div>
         </header>
         <main>
-            <form action="./main.php" class="formulario" id="formulario" method="post">
+            <form action="./main.php" class="formulario" id="formulario" method="post" autocomplete="off">
                     <h2 class="formulario__title">Formulario de carga de datos</h2>
                 <!-- Grupo Nombre -->
             <div class="formulario__grupo" id="grupo__nombre">
@@ -98,7 +98,7 @@
                     <textarea placeholder="Detalles" maxlength="250" class="textarea formulario__input" name="texto" id="texto"></textarea>
                     <i class="formulario__validacion-estado fas fa-times-circle"></i>
                 </div>
-                <p class="formulario__input-error">El texto solo puede contener letras, acentos numeros y caracteres como (, . '' : ; ! ?) !</p>
+                <p class="formulario__input-error">El texto solo puede contener letras, acentos numeros y caracteres como , . '' : ; ! ? !</p>
             </div>
     
                 <div class="formulario__mensaje" id="formulario__mensaje">
@@ -106,13 +106,13 @@
                 </div>
     
                 <div class="formulario__grupo formulario__grupo-btn-enviar">
-                    <button type="submit" class="formulario__btn">Enviar</button>
+                    <button id="btn-submit" type="submit" class="formulario__btn">Enviar</button>
                     <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">Formulario enviado exitosamente!</p>
                 </div>
         </form>
     </main>
         <footer class="footer-section">
-            <h4 class="footer-main-text">No te olvides seguirnos en REDES!</h4>
+            <h4 class="footer-main-text">¡No te olvides seguirnos!</h4>
             <div class="redes-container" id="redes-cont">
                 <button class="button2">
                     <p class="button2-text">Facebook</p>

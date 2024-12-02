@@ -1,9 +1,9 @@
 /* Varibales de paleta de colores light mode*/
 :root {
     /* Paleta general */
-	--app-background:#423b3b;
+	--app-background:#020202;
 	--color-shadow: rgba(0,0,0,0.1);
-	--toggle-background: #020202;
+	--toggle-background: #332e2e;
     --color-primary: #88B04B; /* Verde musgo pastel */
     --color-secondary: #A8D5BA; /* Verde menta suave */
     --color-accent: #6C8E5D; /* Verde oliva apagado */
@@ -13,7 +13,7 @@
 
     /* Formulario */
     --form-background: #F9F9F4; /* Fondo del formulario */
-    --form-title-text: #d9e8d3; /* Texto del título del formulario */
+    --form-title-text: #F2F2F2; /* Texto del título del formulario */
     --form-title-background: #88B04B; /* Fondo del título del formulario */
     --form-input-background: #FFFFFF; /* Fondo de los inputs */
     --form-input-border: #D8E3D8; /* Bordes de los inputs */
@@ -37,12 +37,12 @@
     --color-primary: #6C8E5D; /* Verde oliva apagado */
     --color-secondary: #88B04B; /* Verde musgo pastel */
     --color-accent: #A8D5BA; /* Verde menta suave */
-    --color-background: #1b2d24; /* Verde grisáceo oscuro */
+    --color-background: #24272d; /* Verde grisáceo oscuro */
     --color-text: #e8f0e9; /* Texto blanco verdoso */
     --color-border: #3a4e44; /* Bordes oscuros */
 
     /* Formulario */
-    --form-background: #24272d; /* Fondo del formulario */
+    --form-background: #1e3f2f; /* Fondo del formulario */
     --form-title-text: #d9e8d3; /* Texto del título del formulario */
     --form-title-background: #2e4a3c; /* Fondo del título del formulario */
     --form-input-background: #1b2d24; /* Fondo de los inputs */
@@ -108,7 +108,7 @@ footer{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 180px;
+	height: 200px;
 	padding: .3rem;
 }
 
@@ -315,7 +315,7 @@ footer{
   
   .header-dark-theme {
 	padding: .5rem;
-	background-color: #2f2f2f;
+	background-color: var(--app-background);
 	border-radius: 25px;
 	display: flex; /* Usamos flexbox en cada uno de los contenedores */
 	align-items: center; /* Centrar verticalmente */
@@ -330,10 +330,9 @@ footer{
   .header-weather{
 	background-color: var(--app-background);
 	border-radius: 25px;
-	padding: .5rem;
+	padding: .8rem;
 	display: flex; /* Para alinear icono e información del clima en fila */
 	align-items: center; /* Centra verticalmente el icono y el texto */
-	width: 140px;
 	height: 75px;
 	font-family: -apple-system;
 	font-weight: bold;
@@ -491,7 +490,8 @@ footer{
 .redes-container{
 
 	display: flex;
-	justify-content: space-evenly;
+	justify-content: center;
+	gap: 3rem;
 	align-items: center;
 	padding: .7rem;
 }
@@ -508,7 +508,7 @@ footer{
 	overflow: hidden;
 	z-index: 1;
 	color: var(--button-text);
-	padding: 0.7em 3.3em 0.7em 1.9em;
+	padding: 0.7em 2em 0.8em 1.5em;
 	font-size: 16px;
 	border-radius: 10px;
 	background: var(--color-shadow);
@@ -517,7 +517,7 @@ footer{
   }
 
   .button2 p {
-	padding: .4rem;
+	padding: .6rem;
   }
   .fa-brands i{
 	width: 30px;
@@ -554,7 +554,6 @@ footer{
 	top: 180%;
 	width: 160%;
 	height: 190%;
-	background-color: #128C7E;
 	border-radius: 50%;
 	display: block;
 	transition: all 0.5s 0.1s cubic-bezier(0.55, 0, 0.1, 1);
@@ -563,20 +562,31 @@ footer{
   
 .button2:hover {
 	transform: scale(1.05);
-	color: #ffffff;
-	border: 1px solid #25D366;
   }
   
 .button2:hover:before {
 	top: -35%;
-	background-color: #128C7E;
 	transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
   }
   
 .button2:hover:after {
 	top: -45%;
-	background-color: #1EBEA5;
 	transform: translateX(-50%) scaleY(1.3) scaleX(0.8);
+}
+
+/* Boton de Whatsapp */
+.button2:after{
+	background-color:#E0F6CA;
+}
+.button2:hover{
+	background-color: #EBE5DE;
+	border: 1px solid #35897E;
+}
+.button2:before{
+	background-color: 215C54;
+}
+.button2:hover::after{
+	background-color: #59CE72;
 }
 
 /* Boton de Facebook */
@@ -596,17 +606,17 @@ footer{
 
 /* Boton de Instagram */
 .button2:nth-child(2):after{
-		background-color: #DD2A7B;
+	background-color: #F58529;
 }
 .button2:nth-child(2):hover{
-	background-color: #F58529;
-	border: 1px solid #FEDA77;
+	background-color: #FEDA77;
+	border: 1px solid #515Bd4;
 }
 .button2:nth-child(2):hover::before{
 	background-color: #8134AF;
 }
 .button2:nth-child(2):hover::after{
-	background-color: #515Bd4;
+	background-color: #DD2A7B;
 }
 
 /* ----- -----  Mediaqueries ----- ----- */

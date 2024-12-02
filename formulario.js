@@ -4,6 +4,7 @@ let ejecicion = false;
 let ilat = document.getElementById("lat");
 let ilong = document.getElementById("long");
 let inputs = document.querySelectorAll('#formulario input,select,textarea');
+let btnAlert = document.getElementById('btn-submit');
 
 const expresiones = {
 	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -11,8 +12,8 @@ const expresiones = {
     dni: /^\d{8}$/, //8 numeros.
     texto: /^[a-zA-ZÀ-ÿ0-9\s.,;!?(){}[\]'"-]{1,250}$/,  // Permite letras, números, espacios y signos de puntuación
     residuo: /^(Microbasural|Macrobasural|Basural Municipal)$/, // Tres valores posibles.
-    latitud: /^-?([1-8]?[0-9](\.\d{1,6})?|90(\.0{1,6})?)$/,  // Latitud entre -90 y 90, hasta 6 decimales
-    longitud: /^-?((1[0-7][0-9]|[1-9]?[0-9])(\.\d{1,6})?|180(\.0{1,6})?)$/,  // Longitud entre -180 y 180, hasta 6 decimales
+    latitud: /^-?([1-8]?[0-9](\.\d{1,6})?|90(\.0{1,8})?)$/,  // Latitud entre -90 y 90, hasta 6 decimales
+    longitud: /^-?((1[0-7][0-9]|[1-9]?[0-9])(\.\d{1,8})?|180(\.0{1,6})?)$/,  // Longitud entre -180 y 180, hasta 6 decimales
 }
 
 const campos = {
@@ -28,10 +29,8 @@ const campos = {
 form.addEventListener('submit',(e)=>{
     e.preventDefault();
 
-    console.log(campos);
-
     if(campos.nombre && campos.apellido && campos.dni && campos.texto && campos.latitud && campos.longitud && campos.residuo){
-
+        resetInput();
         form.reset();
         document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
 		setTimeout(() => {
@@ -75,9 +74,12 @@ function obtenerUbicacion(){
         let longitude = position.coords.longitude;
     
         ilat.value = `${latitude}`;
-        // ilat.disabled = true;
         ilong.value = `${longitude}`;
-        // ilong.disabled = true;
+
+        // Validacion y posterior desactivacion de los valores latitud y longitud
+        validarCampo(expresiones.latitud, ilat, 'latitud');
+        validarCampo(expresiones.longitud, ilong, 'longitud');
+        disableInput();
 }
     function error(){
         alert("Error al Obtener la ubicacion");
@@ -109,6 +111,10 @@ function validarFormulario(e){
         case "residuo":
             validarCampo(expresiones.residuo,e.target,'residuo');
     }
+    // Ocultar mensaje de advertencia si todos los campos son válidos
+    if (Object.values(campos).every((campo) => campo)) {
+        document.getElementById('formulario__mensaje').classList.remove('formulario__mensaje-activo');
+    }
 }
 
 function validarCampo(expresion,input,campo){
@@ -128,4 +134,24 @@ function validarCampo(expresion,input,campo){
 		document.querySelector(`#grupo__${campo} .formulario__input-error`).classList.add('formulario__input-error-activo');
 		campos[campo] = false;
     }
+}
+
+function disableInput(){
+    ilat.disabled = true;
+    ilong.disabled = true;
+}
+
+function resetInput(){
+    ilat.value = '';
+    ilong.value = '';
+}
+
+function generateAlert(){
+    btnAlert = insertAdjacentHTML('afterend',`
+            <div id="customAlert" class="custom-alert">
+                <div class="custom-alert-content">
+                    <img src="" class="alert-img" alt="imagen mamalona">
+                </div>
+            </div>
+        `);
 }
