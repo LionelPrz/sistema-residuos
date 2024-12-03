@@ -6,6 +6,7 @@ let ilong = document.getElementById("long");
 let inputs = document.querySelectorAll('#formulario input,select,textarea');
 let btnAlert = document.getElementById('btn-submit');
 
+
 const expresiones = {
 	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
     apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -30,11 +31,11 @@ form.addEventListener('submit',(e)=>{
     e.preventDefault();
 
     if(campos.nombre && campos.apellido && campos.dni && campos.texto && campos.latitud && campos.longitud && campos.residuo){
-        resetInput();
-        form.reset();
-        document.getElementById('formulario__mensaje-exito').classList.add('formulario__mensaje-exito-activo');
 		setTimeout(() => {
-			document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
+            generateAlert("success");
+            resetInput();
+            form.reset();
+			// document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
 		}, 5000);
 
 		document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
@@ -66,23 +67,28 @@ form.addEventListener('click',()=>{
     obtenerUbicacion();
 });
 
-
 function obtenerUbicacion(){
 
     function success(position){
         let latitude = position.coords.latitude;
         let longitude = position.coords.longitude;
     
-        ilat.value = `${latitude}`;
-        ilong.value = `${longitude}`;
+        ilat.addEventListener('click',()=>{
+            ilat.value = `${latitude}`;
+            validarCampo(expresiones.latitud, ilat, 'latitud');
+        });
+        ilong.addEventListener('click',()=>{
+            ilong.value = `${longitude}`;
+            validarCampo(expresiones.longitud, ilong, 'longitud');
+        });
 
         // Validacion y posterior desactivacion de los valores latitud y longitud
-        validarCampo(expresiones.latitud, ilat, 'latitud');
-        validarCampo(expresiones.longitud, ilong, 'longitud');
+
+
         disableInput();
 }
     function error(){
-        alert("Error al Obtener la ubicacion");
+       generateAlert("error","No se pudo obtener la ubicacion. Por favor, Active el GPS !");
     }
     navigator.geolocation.getCurrentPosition(success,error);
 }
@@ -102,14 +108,9 @@ function validarFormulario(e){
         case "texto":
             validarCampo(expresiones.texto,e.target,'texto');
         break;
-        case "latitud":
-            validarCampo(expresiones.latitud,e.target,'latitud');
-        break;
-        case "longitud":
-            validarCampo(expresiones.longitud,e.target,'longitud');
-        break;
         case "residuo":
             validarCampo(expresiones.residuo,e.target,'residuo');
+        break;
     }
     // Ocultar mensaje de advertencia si todos los campos son válidos
     if (Object.values(campos).every((campo) => campo)) {
@@ -137,21 +138,56 @@ function validarCampo(expresion,input,campo){
 }
 
 function disableInput(){
-    ilat.disabled = true;
-    ilong.disabled = true;
+    ilat.readOnly = true;
+    ilong.readOnly= true;
+    console.log("Campos ocultos. Latitud y longitud integros");
 }
 
 function resetInput(){
-    ilat.value = '';
-    ilong.value = '';
+    ilat.value = "";
+    ilong.value = "";    
+    ilat.readOnly = false;
+    ilong.readOnly= false;
+
+    console.log("Campos Reseteados y Restaurados");
 }
 
-function generateAlert(){
-    btnAlert = insertAdjacentHTML('afterend',`
-            <div id="customAlert" class="custom-alert">
-                <div class="custom-alert-content">
-                    <img src="" class="alert-img" alt="imagen mamalona">
-                </div>
+function generateAlert(resultado, mensaje = null){
+    // declaracion de variables
+    let texto;
+    let imagen;
+    let claseCont = "custom-alert";
+    let claseText = "alert-text";
+
+    // Comprobacion para que solo se ejecute una sola vez
+    let existe = document.getElementById("customAlert");
+        if(existe){
+            existe.remove();
+        }
+        // Comprobacion de resultado
+        if(resultado != "success"){
+            // Generacion del alert de error
+            imagen ="./svg-assets/ayuyu-angry-png.png";
+            texto = mensaje || "Se produjo un error al enviar el formulario !";
+            claseText = "alert-text-error";
+            claseCont += " custom-alert-error";
+        }else{
+            // Generacion del alert de exito
+            imagen ="./svg-assets/boochi-nato-png.png";
+            texto = "Formulario enviado Correctamente !";
+            claseCont += " custom-alert-success";
+    }
+    // Generar el elemento de manera dinamica y insertarlo despues del boton
+    btnAlert.insertAdjacentHTML('afterend',`
+            <div id="customAlert" class="${claseCont}">
+                    <img src="${imagen}" class="alert-img" alt="imagen mamalona">
+                    <p class="${claseText}">${texto}</p>
             </div>
         `);
+
+    // Eliminacion del alert despues de 5 segs
+        // setTimeout(()=>{
+        //     let alertDiv = document.getElementById("customAlert");
+        //     if(alertDiv) alertDiv.remove();
+        // },5000);
 }

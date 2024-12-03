@@ -619,6 +619,55 @@ footer{
 	background-color: #DD2A7B;
 }
 
+/* Alert del formulario */
+.custom-alert{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+	justify-content: center;
+	align-items: center;
+	gap: 20px;
+	background-color: var(--button-disabled);
+	color: var(--form-input-text);
+}
+.alert-img{
+	width: 200px;
+	height: 200px;
+	border-radius: 10px;
+}
+.alert-text{
+	padding: .7rem ;
+	background-color: var(--button-background);
+	border-radius: 10px;
+	color: var(--button-text);
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+.alert-text-error{
+	padding: .7rem ;
+	/* width: 400px;
+	height: 500px; */
+	background-color: #bb2929;
+	border-radius: 10px;
+	color: var(--button-text);
+	text-align: center;
+	font-size: 1.5rem;
+	font-weight: bold;
+	
+}
+.custom-alert-error{
+	box-shadow: 2px 2px 8px 4px #7a2323;
+}
+.custom-alert-success{
+	box-shadow: 2px 2px 8px 4px var(--button-hover);
+}
 /* ----- -----  Mediaqueries ----- ----- */
 @media screen and (max-width: 800px) {
 
