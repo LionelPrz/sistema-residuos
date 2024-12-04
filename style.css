@@ -200,7 +200,7 @@ footer{
 	position: absolute;
 	right: 10px;
 	bottom: 15px;
-	z-index: 100;
+	z-index: 2;
 	font-size: 16px;
 	opacity: 0;
 }
@@ -619,27 +619,68 @@ footer{
 	background-color: #DD2A7B;
 }
 
-/* Alert del formulario */
-.custom-alert{
-	position: absolute;
+
+/* Contenedor del Alert del formulario/errores */
+.alert-overlay{
+	position: fixed;
 	top: 0;
 	left: 0;
-	right: 0;
-	bottom: 0;
-	padding: 1rem;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0,0,0,0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 3;
+}
+/* Alert del formulario/errores */
+
+.custom-alert{
+	position: relative;
+	padding: 0rem 0rem 1rem 0rem;
 	display: flex;
 	flex-direction: column;
 	border-radius: 10px;
 	justify-content: center;
 	align-items: center;
-	gap: 20px;
 	background-color: var(--button-disabled);
 	color: var(--form-input-text);
+	width: 90%;
+	max-width: 400px;
+	text-align: center;
+}
+.alert-progress-bar{
+	width: 100%;
+	height: 20px;
+	background-color:var(--color-secondary);
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.bar-content{
+	display: block;
+	animation: progress-animation linear 5s;
+	width: 100%;
+	height: 18px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+.green1{
+	background-color: var(--color-secondary);
+}
+.green{
+	background-color: var(--color-primary);
+}
+.red1{
+	background-color: #ec4747;
+}
+.red{
+	background-color: #bb2929;
 }
 .alert-img{
-	width: 200px;
-	height: 200px;
+	width: 150px;
+	height: 150px;
 	border-radius: 10px;
+	margin-bottom: .1rem;
 }
 .alert-text{
 	padding: .7rem ;
@@ -650,10 +691,10 @@ footer{
 	font-size: 1.5rem;
 	font-weight: bold;
 }
+
 .alert-text-error{
-	padding: .7rem ;
-	/* width: 400px;
-	height: 500px; */
+	padding: 1rem ;
+	margin: 0 1rem;
 	background-color: #bb2929;
 	border-radius: 10px;
 	color: var(--button-text);
@@ -668,6 +709,16 @@ footer{
 .custom-alert-success{
 	box-shadow: 2px 2px 8px 4px var(--button-hover);
 }
+
+@keyframes progress-animation{
+	from{
+		width: 100%;
+	}
+	to{
+		width: 0%;
+	}
+}
+
 /* ----- -----  Mediaqueries ----- ----- */
 @media screen and (max-width: 800px) {
 

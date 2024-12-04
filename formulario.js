@@ -158,34 +158,48 @@ function generateAlert(resultado, mensaje = null){
     let imagen;
     let claseCont = "custom-alert";
     let claseText = "alert-text";
+    let clasePbar = "alert-progress-bar"
+    let claseBar = "bar-content";
+    let existe = document.getElementById("customAlert");
 
     // Comprobacion para que solo se ejecute una sola vez
-    let existe = document.getElementById("customAlert");
-        if(existe){
+            if(existe){
             existe.remove();
         }
-        // Comprobacion de resultado
-        if(resultado != "success"){
-            // Generacion del alert de error
-            imagen ="./svg-assets/ayuyu-angry-png.png";
-            texto = mensaje || "Se produjo un error al enviar el formulario !";
-            claseText = "alert-text-error";
-            claseCont += " custom-alert-error";
-        }else{
-            // Generacion del alert de exito
-            imagen ="./svg-assets/boochi-nato-png.png";
-            texto = "Formulario enviado Correctamente !";
-            claseCont += " custom-alert-success";
-    }
+
+    // Comprobacion de resultado
+            if(resultado != "success"){
+                // Generacion del alert de error
+                imagen ="./svg-assets/ayuyu-angry-png.png";
+                texto = mensaje || "Se produjo un error al enviar el formulario !";
+                claseText = "alert-text-error";
+                clasePbar = "alert-progress-bar red1";
+                claseBar = "bar-content red";
+                claseCont += " custom-alert-error";
+            }
+            else{
+                // Generacion del alert de exito
+                imagen ="./svg-assets/boochi-nato-png.png";
+                texto = "Formulario enviado Correctamente !";
+                claseCont += " custom-alert-success";
+                clasePbar = "alert-progress-bar green1"
+                claseBar = "bar-content green";
+        }
+
     // Generar el elemento de manera dinamica y insertarlo despues del boton
-    btnAlert.insertAdjacentHTML('afterend',`
-            <div id="customAlert" class="${claseCont}">
+        btnAlert.insertAdjacentHTML('afterend',`
+            <div id="customAlert" class="alert-overlay">
+                <div class="${claseCont}">
+                <div class="alert-progress-bar">
+                    <span class="${claseBar}"></span>
+                </div>
                     <img src="${imagen}" class="alert-img" alt="imagen mamalona">
                     <p class="${claseText}">${texto}</p>
+                </div>
             </div>
-        `);
+            `);
 
-    // Eliminacion del alert despues de 5 segs
+    //Eliminacion del alert despues de 5 segs
         // setTimeout(()=>{
         //     let alertDiv = document.getElementById("customAlert");
         //     if(alertDiv) alertDiv.remove();
