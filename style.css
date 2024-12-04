@@ -646,13 +646,12 @@ footer{
 	background-color: var(--button-disabled);
 	color: var(--form-input-text);
 	width: 90%;
-	max-width: 400px;
+	max-width: 500px;
 	text-align: center;
 }
 .alert-progress-bar{
 	width: 100%;
 	height: 20px;
-	background-color:var(--color-secondary);
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 }
@@ -663,6 +662,7 @@ footer{
 	height: 18px;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
 }
 .green1{
 	background-color: var(--color-secondary);
@@ -671,10 +671,10 @@ footer{
 	background-color: var(--color-primary);
 }
 .red1{
-	background-color: #ec4747;
+	background-color:  #ff4242;
 }
 .red{
-	background-color: #bb2929;
+	background-color: #d31414;
 }
 .alert-img{
 	width: 150px;
@@ -683,12 +683,13 @@ footer{
 	margin-bottom: .1rem;
 }
 .alert-text{
-	padding: .7rem ;
+	padding: .6rem ;
+	margin: 0 1rem;
 	background-color: var(--button-background);
 	border-radius: 10px;
 	color: var(--button-text);
 	text-align: center;
-	font-size: 1.5rem;
+	font-size: 1.6rem;
 	font-weight: bold;
 }
 

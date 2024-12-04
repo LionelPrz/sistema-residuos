@@ -160,12 +160,10 @@ function generateAlert(resultado, mensaje = null){
     let claseText = "alert-text";
     let clasePbar = "alert-progress-bar"
     let claseBar = "bar-content";
-    let existe = document.getElementById("customAlert");
+    let overlayID = document.getElementById("customAlert");
 
-    // Comprobacion para que solo se ejecute una sola vez
-            if(existe){
-            existe.remove();
-        }
+    // Comprobacion para que solo se ejecute una sola vez      
+            if(overlayID) return;
 
     // Comprobacion de resultado
             if(resultado != "success"){
@@ -173,24 +171,24 @@ function generateAlert(resultado, mensaje = null){
                 imagen ="./svg-assets/ayuyu-angry-png.png";
                 texto = mensaje || "Se produjo un error al enviar el formulario !";
                 claseText = "alert-text-error";
-                clasePbar = "alert-progress-bar red1";
+                clasePbar = "alert-progress-bar  red1";
                 claseBar = "bar-content red";
                 claseCont += " custom-alert-error";
             }
             else{
                 // Generacion del alert de exito
                 imagen ="./svg-assets/boochi-nato-png.png";
-                texto = "Formulario enviado Correctamente !";
+                texto = "¡ Formulario enviado correctamente !";
                 claseCont += " custom-alert-success";
                 clasePbar = "alert-progress-bar green1"
                 claseBar = "bar-content green";
         }
 
-    // Generar el elemento de manera dinamica y insertarlo despues del boton
-        btnAlert.insertAdjacentHTML('afterend',`
-            <div id="customAlert" class="alert-overlay">
-                <div class="${claseCont}">
-                <div class="alert-progress-bar">
+            // Generar el elemento de manera dinamica y insertarlo despues del boton
+            btnAlert.insertAdjacentHTML('afterend',`
+                <div id="customAlert" class="alert-overlay">
+                    <div class="${claseCont}">
+                    <div class="${clasePbar}">
                     <span class="${claseBar}"></span>
                 </div>
                     <img src="${imagen}" class="alert-img" alt="imagen mamalona">
@@ -199,9 +197,29 @@ function generateAlert(resultado, mensaje = null){
             </div>
             `);
 
+    // Generar el elemento de manera dinamica y insertarlo despues del boton
+    btnAlert.insertAdjacentHTML('afterend',`
+        <div id="customAlert" class="alert-overlay">
+            <div class="${claseCont}">
+            <div class="${clasePbar}">
+            <span class="${claseBar}"></span>
+        </div>
+            <img src="${imagen}" class="alert-img" alt="imagen mamalona">
+            <p class="${claseText}">${texto}</p>
+        </div>
+    </div>
+    `);
+
+    // Validacion para evitar la propagacion del evento click del formulario
+        let idlokito = document.getElementById("customAlert");
+        idlokito.addEventListener('click',(e)=>{
+            e.stopPropagation();
+
+            setTimeout(()=>{
+                idlokito.remove();
+            },5000);
+        })
+
     //Eliminacion del alert despues de 5 segs
-        // setTimeout(()=>{
-        //     let alertDiv = document.getElementById("customAlert");
-        //     if(alertDiv) alertDiv.remove();
-        // },5000);
+
 }
