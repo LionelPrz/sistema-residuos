@@ -35,12 +35,10 @@ form.addEventListener('submit',(e)=>{
             generateAlert("success");
             resetInput();
             form.reset();
-			// document.getElementById('formulario__mensaje-exito').classList.remove('formulario__mensaje-exito-activo');
-		}, 5000);
-
 		document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
-			icono.classList.remove('formulario__grupo-correcto');
-		});
+                icono.classList.remove('formulario__grupo-correcto');
+            });
+        }, 5000);
 	} 
     else {
 		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
@@ -140,7 +138,6 @@ function validarCampo(expresion,input,campo){
 function disableInput(){
     ilat.readOnly = true;
     ilong.readOnly= true;
-    console.log("Campos ocultos. Latitud y longitud integros");
 }
 
 function resetInput(){
@@ -148,11 +145,13 @@ function resetInput(){
     ilong.value = "";    
     ilat.readOnly = false;
     ilong.readOnly= false;
-
-    console.log("Campos Reseteados y Restaurados");
 }
 
 function generateAlert(resultado, mensaje = null){
+
+    // Validacion precencia para evitar duplicados
+    if(document.getElementById("customAlert")) return;
+
     // declaracion de variables
     let texto;
     let imagen;
@@ -160,10 +159,6 @@ function generateAlert(resultado, mensaje = null){
     let claseText = "alert-text";
     let clasePbar = "alert-progress-bar"
     let claseBar = "bar-content";
-    let overlayID = document.getElementById("customAlert");
-
-    // Comprobacion para que solo se ejecute una sola vez      
-            if(overlayID) return;
 
     // Comprobacion de resultado
             if(resultado != "success"){
@@ -197,29 +192,12 @@ function generateAlert(resultado, mensaje = null){
             </div>
             `);
 
-    // Generar el elemento de manera dinamica y insertarlo despues del boton
-    btnAlert.insertAdjacentHTML('afterend',`
-        <div id="customAlert" class="alert-overlay">
-            <div class="${claseCont}">
-            <div class="${clasePbar}">
-            <span class="${claseBar}"></span>
-        </div>
-            <img src="${imagen}" class="alert-img" alt="imagen mamalona">
-            <p class="${claseText}">${texto}</p>
-        </div>
-    </div>
-    `);
+        const idCont = document.getElementById("customAlert");
 
-    // Validacion para evitar la propagacion del evento click del formulario
-        let idlokito = document.getElementById("customAlert");
-        idlokito.addEventListener('click',(e)=>{
-            e.stopPropagation();
-
+                idCont.addEventListener('click',(e)=>{
+                e.stopPropagation();
+            });
             setTimeout(()=>{
-                idlokito.remove();
+                idCont.remove()
             },5000);
-        })
-
-    //Eliminacion del alert despues de 5 segs
-
 }

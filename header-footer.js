@@ -30,35 +30,27 @@ window.addEventListener('load',()=>{
           switch(data.weather[0].main){
             case 'Clear':
               image.src = './svg-assets/day.svg'
-              console.log('limpio');
               break;
             case 'Clouds':
               image.src = './svg-assets/cloudy-day-1.svg'
-              console.log('nubes');
               break;
             case 'Rain':
               image.src = './svg-assets/rainy-7.svg'
-              console.log('lluvia');
               break;
             case 'Drizzle':
               image.src = './svg-assets/rainy-2svg'
-              console.log('llovizna');
               break;
             case 'Snow':
               image.src = './svg-assets/snowy-6svg'
-              console.log('nieve');
               break;
             case 'Thunderstorm':
               image.src = './svg-assets/thunder.svg'
-              console.log('tormenta');
               break;
             case 'Atmosphere':
               image.src = './svg-assets/weather.svg'
-              console.log('atmosfera');
               break;
             default:
               image.src = './svg-assets/cloudy-day-1.svg'
-              console.log('defercto');
               break;
           }
         })
