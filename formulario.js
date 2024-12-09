@@ -5,7 +5,7 @@ let ilat = document.getElementById("lat");
 let ilong = document.getElementById("long");
 let inputs = document.querySelectorAll('#formulario input,select,textarea');
 let btnAlert = document.getElementById('btn-submit');
-
+let alertInfo = false;
 
 const expresiones = {
 	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -32,7 +32,7 @@ form.addEventListener('submit',(e)=>{
 
     if(campos.nombre && campos.apellido && campos.dni && campos.texto && campos.latitud && campos.longitud && campos.residuo){
 		setTimeout(() => {
-            generateAlert("success");
+            generateAlert("info");
             resetInput();
             form.reset();
 		document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
@@ -62,37 +62,74 @@ form.addEventListener('click',()=>{
         `);
         ejecicion = true;
     }
-    obtenerUbicacion();
+
 });
 
+// Validaciones y Solicitud de latitud y longitud
+
+ilat.addEventListener('click',obtenerUbicacion);
+ilong.addEventListener('click',obtenerUbicacion);
+
+
 function obtenerUbicacion(){
+
+    if(!alertInfo){
+        navigator.permissions.query({name:'geolocation'})
+        .then(function(result){
+            if(result.state === 'granted'){
+                navigator.geolocation.getCurrentPosition(success,error);
+                alertInfo = true;
+            }
+            else if(result.state === 'prompt'){
+                info();
+                navigator.geolocation.getCurrentPosition(success,error);
+                alertInfo = false;
+            }
+            else if(result.state === 'denied'){
+                error(error);
+                alertInfo = false;
+            }
+        });
+    
+    function info(){
+        generateAlert("info", "Necesitamos acceder a tu ubicacion para completar el formulario. Por favor, permita el acceso !");
+    }
 
     function success(position){
         let latitude = position.coords.latitude;
         let longitude = position.coords.longitude;
     
-        ilat.addEventListener('click',()=>{
             ilat.value = `${latitude}`;
             validarCampo(expresiones.latitud, ilat, 'latitud');
-        });
-        ilong.addEventListener('click',()=>{
+
             ilong.value = `${longitude}`;
             validarCampo(expresiones.longitud, ilong, 'longitud');
-        });
-
-        // Validacion y posterior desactivacion de los valores latitud y longitud
-
-
-        disableInput();
-}
-    function error(){
-       generateAlert("error","No se pudo obtener la ubicacion. Por favor, Active el GPS !");
+            // Validacion y posterior desactivacion de los valores latitud y longitud
+            disableInput();
+                generateAlert("success","Ubicacion obtenida con exito");
     }
-    navigator.geolocation.getCurrentPosition(success,error);
+}
+
+    function error(error){
+        let msg = "";
+        switch(error.code){
+            case error.PERMISSION_DENIED:
+                msg = "No se permitio el acceso a la ubicacion. Active los permisos para continuar !";
+                break;
+            case error.POSITION_UNAVAILABLE:
+                msg = "No se pudo obtener su ubicacion. Por favor intente nuevamente !";
+                break;
+            case error.TIMEOUT:
+                msg = "La solicitud de ubicacion tardo demasiado. Intentelo nuevamente !";
+                break;
+            default:
+                msg = "Ocurrio un error inesperado al obtener su ubicacion.";
+        }
+            generateAlert("error", msg);
+    }
 }
 
 function validarFormulario(e){
-
     switch(e.target.name){
         case "nombre":
             validarCampo(expresiones.nombre,e.target,'nombre');
@@ -161,23 +198,38 @@ function generateAlert(resultado, mensaje = null){
     let claseBar = "bar-content";
 
     // Comprobacion de resultado
-            if(resultado != "success"){
-                // Generacion del alert de error
-                imagen ="./svg-assets/ayuyu-angry-png.png";
-                texto = mensaje || "Se produjo un error al enviar el formulario !";
-                claseText = "alert-text-error";
-                clasePbar = "alert-progress-bar  red1";
-                claseBar = "bar-content red";
-                claseCont += " custom-alert-error";
-            }
-            else{
-                // Generacion del alert de exito
-                imagen ="./svg-assets/boochi-nato-png.png";
-                texto = "¡ Formulario enviado correctamente !";
-                claseCont += " custom-alert-success";
-                clasePbar = "alert-progress-bar green1"
-                claseBar = "bar-content green";
-        }
+
+    switch(resultado){
+
+        case "error":
+            // Generacion del alert de error
+            imagen ="./svg-assets/ayuyu-angry-png.png";
+            texto = mensaje || "Se produjo un error al enviar el formulario !";
+            claseText = "alert-text-error";
+            clasePbar = "alert-progress-bar  red1";
+            claseBar = "bar-content red";
+            claseCont += " custom-alert-error";
+            break;
+        
+        case "success":
+            // Generacion del alert de exito
+            imagen ="./svg-assets/boochi-nato-png.png";
+            texto = mensaje || "Formulario enviado Correctamente";
+            claseCont += " custom-alert-success";
+            clasePbar = "alert-progress-bar green1"
+            claseBar = "bar-content green";
+            break;
+        
+        case "info":
+            // Generacion del alert de informacion
+            imagen ="./svg-assets/boochi-nato-png.png";
+            claseText = "alert-text-info";
+            texto = mensaje || "Por favor permita el acceso a su ubicacion !";
+            claseCont += " custom-alert-info";
+            clasePbar = "alert-progress-bar blue1"
+            claseBar = "bar-content blue";
+            break;
+    }
 
             // Generar el elemento de manera dinamica y insertarlo despues del boton
             btnAlert.insertAdjacentHTML('afterend',`
@@ -200,4 +252,4 @@ function generateAlert(resultado, mensaje = null){
             setTimeout(()=>{
                 idCont.remove()
             },5000);
-}
+    }
