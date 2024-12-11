@@ -29,28 +29,28 @@ window.addEventListener('load',()=>{
           // Iconos animados
           switch(data.weather[0].main){
             case 'Clear':
-              image.src = './svg-assets/day.svg'
+              image.src = 'svg-assets/day.svg'
               break;
             case 'Clouds':
-              image.src = './svg-assets/cloudy-day-1.svg'
+              image.src = 'svg-assets/cloudy-day-1.svg'
               break;
             case 'Rain':
-              image.src = './svg-assets/rainy-7.svg'
+              image.src = 'svg-assets/rainy-7.svg'
               break;
             case 'Drizzle':
-              image.src = './svg-assets/rainy-2svg'
+              image.src = 'svg-assets/rainy-2svg'
               break;
             case 'Snow':
-              image.src = './svg-assets/snowy-6svg'
+              image.src = 'svg-assets/snowy-6svg'
               break;
             case 'Thunderstorm':
-              image.src = './svg-assets/thunder.svg'
+              image.src = 'svg-assets/thunder.svg'
               break;
             case 'Atmosphere':
-              image.src = './svg-assets/weather.svg'
+              image.src = 'svg-assets/weather.svg'
               break;
             default:
-              image.src = './svg-assets/cloudy-day-1.svg'
+              image.src = 'svg-assets/cloudy-day-1.svg'
               break;
           }
         })
