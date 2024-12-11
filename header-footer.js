@@ -1,4 +1,3 @@
-// variables para el dark mode
 let darkmode = localStorage.getItem('darkmode');
 const themeSwitch = document.getElementById('switch');
 const themeText = document.querySelector('.header-dark-theme p'); // Elemento de texto del modo
