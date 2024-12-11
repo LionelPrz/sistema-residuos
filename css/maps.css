@@ -1,0 +1,71 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 175px 1fr 175px;
+    width: 100dvw;
+    height: 100dvh;
+    background-color: var(--color-background);
+	color: var(--color-text);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+}
+
+header{
+    grid-column: span 3 / span 3;
+    background-color: var(--header-footer-background);
+	color: var(--header-footer-text);
+	border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+	box-shadow: 4px 4px 0px 1px var(--button-hover);
+}
+main{
+    grid-area: span 2 / span 2;
+    grid-row-start: 2;
+    padding: 3.2rem;
+    margin: 1rem 0;
+	display: flex;
+	justify-content: center;
+
+}
+aside{
+    grid-column-start: 3;
+    grid-row-start: 2;
+    padding: 3.2rem;
+    margin: 1rem 0;
+	display: flex;
+	justify-content: center;
+}
+footer{
+    grid-column: span 3 / span 3;
+    grid-row-start: 3;
+    background-color: var(--header-footer-background);
+    color: var(--header-footer-text);
+    padding: 1rem;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+/* Estilos Generales */
+
+
+
+@media screen and (max-width: 600px){
+        /* Responsive de elementos Padres */
+        body{
+            grid-template-columns:1fr;
+            grid-template-rows: 200px 1fr 1fr 420px;
+        }
+        aside{
+            grid-column-start: 1;
+            grid-row-start: 3;
+        }
+        footer{
+            grid-row-start: 4;
+        }
+}
