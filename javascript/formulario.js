@@ -13,7 +13,7 @@ const expresiones = {
     dni: /^\d{8}$/, //8 numeros.
     texto: /^[a-zA-ZÀ-ÿ0-9\s.,;!?(){}[\]'"-]{1,250}$/,  // Permite letras, números, espacios y signos de puntuación
     residuo: /^(Microbasural|Macrobasural|Basural Municipal)$/, // Tres valores posibles.
-    latitud: /^-?([1-8]?[0-9](\.\d{1,6})?|90(\.0{1,8})?)$/,  // Latitud entre -90 y 90, hasta 6 decimales
+    latitud: /^-?([1-8]?[0-9](\.\d{1,10})?|90(\.0{1,10})?)$/,  // Latitud entre -90 y 90, hasta 6 decimales
     longitud: /^-?((1[0-7][0-9]|[1-9]?[0-9])(\.\d{1,8})?|180(\.0{1,6})?)$/,  // Longitud entre -180 y 180, hasta 6 decimales
 }
 
