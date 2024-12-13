@@ -28,8 +28,8 @@ header{
 main{
     grid-area: span 2 / span 2;
     grid-row-start: 2;
-    padding: 3.2rem;
-    margin: 1rem 0;
+    padding: .8rem;
+    margin: .3rem;
 	display: flex;
 	justify-content: center;
     border-radius: 10px;
@@ -60,8 +60,13 @@ footer{
 
 /* Estilos Generales */
 
+#map {
+    height: 100%;
+    width: 100%;
+    border-radius: 10px; 
+}
 
-
+/* Media Query Resposive */
 @media screen and (max-width: 600px){
         /* Responsive de elementos Padres */
         body{
