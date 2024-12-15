@@ -37,7 +37,7 @@
                 </div>
         </header>
         <main>
-            <form action="./main.php" class="formulario" id="formulario" method="post" autocomplete="off">
+            <form class="formulario" id="formulario" autocomplete="off">
                     <h2 class="formulario__title">Formulario de carga de datos</h2>
                 <!-- Grupo Nombre -->
             <div class="formulario__grupo" id="grupo__nombre">
@@ -75,6 +75,24 @@
                 </div>
                 <p class="formulario__input-error">Por favor seleccione un tipo de residuo!</p>
             </div>
+            <!-- Grupo Accesibilidad -->
+            <div class="formulario__grupo" id="grupo__acceso">
+                <label for="residuo" class="formulario__label">Indice de Accesibilidad</label>
+                <div class="formulario__grupo-input">
+                    <select class="formulario__input" name="acceso" id="acceso"></select>
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Por favor seleccione el indice de accesibilidad!</p>
+            </div>
+            <!-- Grupo Fecha -->
+            <div class="formulario__grupo" id="grupo__fecha">
+                <label for="residuo" class="formulario__label">Fecha</label>
+                <div class="formulario__grupo-input">
+                    <input type="date" id="fecha" name="fecha" class="formulario__input">
+                    <i class="formulario__validacion-estado fas fa-times-circle"></i>
+                </div>
+                <p class="formulario__input-error">Por favor ingrese la fecha!</p>
+            </div>
             <!-- Grupo Latitud -->
             <div class="formulario__grupo" id="grupo__latitud">
                 <label for="lat" class="formulario__label">Latitud</label>
@@ -102,7 +120,6 @@
                 </div>
                 <p class="formulario__input-error">El texto solo puede contener letras, acentos numeros y caracteres como , . '' : ; ! ? !</p>
             </div>
-    
                 <div class="formulario__mensaje" id="formulario__mensaje">
                     <p><i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor rellena el formulario correctamente. </p>
                 </div>

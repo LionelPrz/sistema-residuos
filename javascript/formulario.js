@@ -1,44 +1,71 @@
 let form = document.querySelector(".formulario");
 let selectD = document.getElementById("residuo");
-let ejecicion = false;
+let access = document.getElementById("acceso");
 let ilat = document.getElementById("lat");
 let ilong = document.getElementById("long");
 let inputs = document.querySelectorAll('#formulario input,select,textarea');
 let btnAlert = document.getElementById('btn-submit');
+let fechador = document.getElementById("fecha");
 let alertInfo = false;
+let ejecicion = false;
+let formdata;
 
-const expresiones = {
-	nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-    apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
-    dni: /^\d{8}$/, //8 numeros.
-    texto: /^[a-zA-ZÀ-ÿ0-9\s.,;!?(){}[\]'"-]{1,250}$/,  // Permite letras, números, espacios y signos de puntuación
-    residuo: /^(Microbasural|Macrobasural|Basural Municipal)$/, // Tres valores posibles.
-    latitud: /^-?([1-8]?[0-9](\.\d{1,6})?|90(\.0{1,8})?)$/,  // Latitud entre -90 y 90, hasta 6 decimales
-    longitud: /^-?((1[0-7][0-9]|[1-9]?[0-9])(\.\d{1,8})?|180(\.0{1,6})?)$/,  // Longitud entre -180 y 180, hasta 6 decimales
+    const expresiones = {
+	    nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+        apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+        dni: /^\d{8}$/, //8 numeros.
+        texto: /^[a-zA-ZÀ-ÿ0-9\s.,;!?(){}[\]'"-]{1,250}$/,  // Permite letras, números, espacios y signos de puntuación
+        residuo: /^(Microbasural|Macrobasural|Basural Municipal)$/, // Tres valores posibles.
+        acceso: /^(facil|complicado|dificil)$/, // Tres valores posibles.
+        fecha: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/,  //Validaciones para la fecha.
+        residuo: /^(Microbasural|Macrobasural|Basural Municipal)$/, // Tres valores posibles.
+        latitud: /^-?([1-8]?[0-9](\.\d{1,6})?|90(\.0{1,8})?)$/,  // Latitud entre -90 y 90, hasta 6 decimales
+        longitud: /^-?((1[0-7][0-9]|[1-9]?[0-9])(\.\d{1,8})?|180(\.0{1,6})?)$/,  // Longitud entre -180 y 180, hasta 6 decimales
 }
 
-const campos = {
-    nombre: false,
-    apellido: false,
-    dni: false,
-    texto: false,
-    latitud:false,
-    longitud:false,
-    residuo:false,
+    const campos = {
+        nombre: false,
+        apellido: false,
+        dni: false,
+        texto: false,
+        latitud:false,
+        longitud:false,
+        residuo:false,
+        acceso:false,
+        fecha: false
 }
 
-form.addEventListener('submit',(e)=>{
-    e.preventDefault();
+    form.addEventListener('submit',(e)=>{
+        e.preventDefault();
 
-    if(campos.nombre && campos.apellido && campos.dni && campos.texto && campos.latitud && campos.longitud && campos.residuo){
-		setTimeout(() => {
-            generateAlert("info");
+    if(campos.nombre && campos.apellido && campos.dni && campos.texto && campos.latitud && campos.longitud && campos.residuo&& campos.acceso){
+		// setTimeout(() => {
+        //     generateAlert("success");
+        //     resetInput();
+        //     form.reset();
+		// document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
+        //         icono.classList.remove('formulario__grupo-correcto');
+        //     });
+        // }, 5000);
+
+        // Envio de formulario ahora si es enserio
+        formdata = new FormData(form);
+        
+        // Envio de los datos
+        fetch('/recepcion-datos.php',{
+            method: 'POST',
+            body: formdata,
+        })
+        .then(response => response.json())
+        .then(data =>{
+            generateAlert('success');
+            console.log(data);
             resetInput();
             form.reset();
-		document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
-                icono.classList.remove('formulario__grupo-correcto');
-            });
-        }, 5000);
+        })
+        .catch((error)=>{
+            generateAlert('error',error);
+        });
 	} 
     else {
 		document.getElementById('formulario__mensaje').classList.add('formulario__mensaje-activo');
@@ -46,29 +73,34 @@ form.addEventListener('submit',(e)=>{
     }
 )
 
-inputs.forEach((input)=>{
-    input.addEventListener('keyup',validarFormulario);
-    input.addEventListener('blur',validarFormulario);
-    input.addEventListener('change',validarFormulario);
+    inputs.forEach((input)=>{
+            input.addEventListener('keyup',validarFormulario);
+            input.addEventListener('blur',validarFormulario);
+            input.addEventListener('change',validarFormulario);
 })
 
-form.addEventListener('click',()=>{
-    if(!ejecicion){
-        selectD.insertAdjacentHTML('beforeend',`
-            <option disabled selected>Tipo de Residuo</option>
-            <option value="Microbasural">Microbasural</option>
-            <option value="Macrobasural">Macrobasural</option>
-            <option value="Basural Municipal">Basural Municipal</option>
+    form.addEventListener('click',()=>{
+        if(!ejecicion){
+            selectD.insertAdjacentHTML('beforeend',`
+                <option disabled selected>Tipo de Residuo</option>
+                <option value="Microbasural">Microbasural</option>
+                <option value="Macrobasural">Macrobasural</option>
+                <option value="Basural Municipal">Basural Municipal</option>
         `);
-        ejecicion = true;
+            access.insertAdjacentHTML('beforeend',`
+                <option disabled selected>Indice de accesibilidad</option>
+                <option value="facil">Acceso facil</option>
+                <option value="complicado">Acceso complicado</option>
+                <option value="dificil">Acceso dificil</option>
+        `);
+            ejecicion = true;
     }
-
 });
 
-// Validaciones y Solicitud de latitud y longitud
-
-ilat.addEventListener('click',obtenerUbicacion);
-ilong.addEventListener('click',obtenerUbicacion);
+// Validaciones y Solicitud de latitud y longitud y de fecha
+    ilat.addEventListener('click',obtenerUbicacion);
+    ilong.addEventListener('click',obtenerUbicacion);
+    fechador.addEventListener('click',obtenerFecha);
 
 
 function obtenerUbicacion(){
@@ -145,6 +177,12 @@ function validarFormulario(e){
         break;
         case "residuo":
             validarCampo(expresiones.residuo,e.target,'residuo');
+        break;
+        case "fecha":
+            validarCampo(expresiones.fecha,e.target,'fecha');
+        break;
+        case "acceso":
+            validarCampo(expresiones.acceso,e.target,'acceso');
         break;
     }
     // Ocultar mensaje de advertencia si todos los campos son válidos
@@ -253,3 +291,8 @@ function generateAlert(resultado, mensaje = null){
                 idCont.remove()
             },5000);
     }
+
+function obtenerFecha(){
+    let fecha = new Date();
+    fechador.value = fecha.toISOString().split('T')[0];
+}

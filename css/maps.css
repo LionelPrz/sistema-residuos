@@ -14,7 +14,6 @@ body{
     background-color: var(--color-background);
 	color: var(--color-text);
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-
 }
 
 header{
@@ -30,23 +29,18 @@ main{
     grid-row-start: 2;
     padding: .8rem;
     margin: .3rem;
-	display: flex;
-	justify-content: center;
     border-radius: 10px;
     background-color: var(--color-text);
     margin: .7rem;
 
 }
 aside{
-    grid-column-start: 3;
-    grid-row-start: 2;
-    padding: 3.2rem;
-    margin: 1rem 0;
 	display: flex;
 	justify-content: center;
     border-radius: 10px;
     background-color: var(--color-text);
     margin: .7rem;
+    border: 1px green solid;
 }
 footer{
     grid-column: span 3 / span 3;
@@ -63,19 +57,125 @@ footer{
 #map {
     height: 100%;
     width: 100%;
-    border-radius: 10px; 
+    border-radius: 10px;
+    min-height: max-content;
+
 }
+
+/* Contenedor Aside */
+
+.dropdown-body{
+    padding: .5rem;
+    margin: .5rem;
+    border-radius: 10px;
+    background-color: #f2f2f2;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.dropdown-container{
+    margin: .3rem;
+}
+
+.dropdown-select{
+    text-align: center;
+    padding: .7rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+    color: #9fa5b5;
+    background: #323741;
+    border: 1px #363a43 solid;
+    box-shadow: 0 .5rem .5rem rgba(0,0,0,.2);
+}
+.dropdown-select-clicked{
+    background: #414a5c;
+    border: 1px #262a33 solid;
+    box-shadow: 0 .5rem .5rem rgba(0,0,0,.3);
+    animation:jello-vertical .9s linear both; 
+}
+
+.dropdown-select:hover{
+    background: #4b505a;
+    border: 1px #293041 solid;
+    box-shadow: 0 .5rem .5rem rgba(0,0,0,.35);
+
+}
+.dropdown-menu{
+    display: none;
+    list-style: none;
+    padding: 0.2rem 0.5rem;
+    background: #323741;
+    border: 1px #363a43 solid;
+    box-shadow: 0 .5rem .5rem rgba(0,0,0,.2);
+    color: #9fa5b5;
+    border-radius: 10px;
+    margin: .3rem;
+    transition: .2s;
+}
+.dropdown-menu li{
+    padding: 0.5rem 0.3rem;
+    margin: .2rem 0;
+    border-radius: .3rem;
+    cursor: pointer;
+    /* animation:bounce-top 1.5s linear both; */
+}
+
+.dropdown-menu li:hover{
+    background: #2a2d35;
+
+}
+.active{
+    background: #23242a;
+}
+.dropdown-menu-open{
+    display: block;
+    opacity: 1;
+    animation:blur-in-expand 0.3s linear both
+}
+/* Animaciones */
+@keyframes jello-vertical{
+    0%{transform:scale3d(1,1,1)}
+    30%{transform:scale3d(.75,1.25,1)}
+    40%{transform:scale3d(1.25,.75,1)}
+    50%{transform:scale3d(.85,1.15,1)}
+    65%{transform:scale3d(1.05,.95,1)}
+    75%{transform:scale3d(.95,1.05,1)}
+    100%{transform:scale3d(1,1,1)}}
+
+@keyframes bounce-top{
+    0%{transform:translateY(-45px);animation-timing-function:ease-in;opacity:1}
+    24%{opacity:1}
+    40%{transform:translateY(-24px);animation-timing-function:ease-in}
+    65%{transform:translateY(-12px);animation-timing-function:ease-in}
+    82%{transform:translateY(-6px);animation-timing-function:ease-in}
+    93%{transform:translateY(-4px);animation-timing-function:ease-in}
+    25%,55%,75%,87%{transform:translateY(0);animation-timing-function:ease-out}
+    100%{transform:translateY(0);animation-timing-function:ease-out;opacity:1}}
+
+@keyframes blur-in-expand{
+    0%{transform:scale(0);filter:blur(12px);opacity:0}
+    100%{transform:scale(1);filter:blur(0);opacity:1}}
+
 
 /* Media Query Resposive */
 @media screen and (max-width: 600px){
         /* Responsive de elementos Padres */
         body{
             grid-template-columns:1fr;
-            grid-template-rows: 200px 1fr 1fr 420px;
+            grid-template-rows: 200px 1fr 1fr auto;
+        }
+        main{
+            grid-column-start: 1;
+            grid-row-start: 3;
+        }
+        #map{
+            height: 60vh;
         }
         aside{
             grid-column-start: 1;
-            grid-row-start: 3;
+            grid-row-start: 2;
         }
         footer{
             grid-row-start: 4;
