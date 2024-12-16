@@ -133,6 +133,7 @@ function info(){
 }
 
 function success(position){
+    navigator.geolocation.getCurrentPosition(success,error);
     let latitude = position.coords.latitude;
     let longitude = position.coords.longitude;
 
