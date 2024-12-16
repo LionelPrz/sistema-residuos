@@ -1,3 +1,5 @@
+// Variables relacionadas con el formulario
+
 let form = document.querySelector(".formulario");
 let selectD = document.getElementById("residuo");
 let access = document.getElementById("acceso");
@@ -6,8 +8,8 @@ let ilong = document.getElementById("long");
 let inputs = document.querySelectorAll('#formulario input,select,textarea');
 let btnAlert = document.getElementById('btn-submit');
 let fechador = document.getElementById("fecha");
-let alertInfo = false;
-let ejecicion = false;
+
+// Variable para cargar los datos del formulario
 let formdata;
 
     const expresiones = {
@@ -18,12 +20,12 @@ let formdata;
         residuo: /^(Microbasural|Macrobasural|Basural Municipal)$/, // Tres valores posibles.
         acceso: /^(facil|complicado|dificil)$/, // Tres valores posibles.
         fecha: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/,  //Validaciones para la fecha.
-        residuo: /^(Microbasural|Macrobasural|Basural Municipal)$/, // Tres valores posibles.
         latitud: /^-?([1-8]?[0-9](\.\d{1,6})?|90(\.0{1,8})?)$/,  // Latitud entre -90 y 90, hasta 6 decimales
         longitud: /^-?((1[0-7][0-9]|[1-9]?[0-9])(\.\d{1,8})?|180(\.0{1,6})?)$/,  // Longitud entre -180 y 180, hasta 6 decimales
 }
 
     const campos = {
+        // creacion de campos para el formulario
         nombre: false,
         apellido: false,
         dni: false,
@@ -32,36 +34,35 @@ let formdata;
         longitud:false,
         residuo:false,
         acceso:false,
-        fecha: false
+        fecha: false,
+        // creacion de los campos bandera para el control de flujo
+        alertInfo: false,
+        ejecucion: false,
+        latitudCargada: false,
+        longitudCargada: false,
+        fechaCargada: false,
 }
 
     form.addEventListener('submit',(e)=>{
         e.preventDefault();
 
-    if(campos.nombre && campos.apellido && campos.dni && campos.texto && campos.latitud && campos.longitud && campos.residuo&& campos.acceso){
-		// setTimeout(() => {
-        //     generateAlert("success");
-        //     resetInput();
-        //     form.reset();
-		// document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
-        //         icono.classList.remove('formulario__grupo-correcto');
-        //     });
-        // }, 5000);
-
-        // Envio de formulario ahora si es enserio
+    if(Object.values(campos).every((campo)=>campo)){
+        // Creacion del objeto de Formulario para su envio
         formdata = new FormData(form);
         
         // Envio de los datos
-        fetch('/recepcion-datos.php',{
+        fetch('../php/recepcion-datos.php',{
             method: 'POST',
-            body: formdata,
+            body: formdata
         })
         .then(response => response.json())
         .then(data =>{
+            // Generacion del alerta de envio correcto y reinicio del formulario
             generateAlert('success');
             console.log(data);
-            resetInput();
-            form.reset();
+
+            // Reinicio del formulario y los estados
+            resetForm();
         })
         .catch((error)=>{
             generateAlert('error',error);
@@ -80,7 +81,11 @@ let formdata;
 })
 
     form.addEventListener('click',()=>{
-        if(!ejecicion){
+        if(!campos.ejecucion){
+            // limmpieza de las opciones anteriores
+            selectD.innerHTML = '';
+            access.innerHTML = '';
+
             selectD.insertAdjacentHTML('beforeend',`
                 <option disabled selected>Tipo de Residuo</option>
                 <option value="Microbasural">Microbasural</option>
@@ -93,72 +98,80 @@ let formdata;
                 <option value="complicado">Acceso complicado</option>
                 <option value="dificil">Acceso dificil</option>
         `);
-            ejecicion = true;
+            campos.ejecucion = true;
     }
 });
 
 // Validaciones y Solicitud de latitud y longitud y de fecha
-    ilat.addEventListener('click',obtenerUbicacion);
-    ilong.addEventListener('click',obtenerUbicacion);
-    fechador.addEventListener('click',obtenerFecha);
+ilat.addEventListener('click',obtenerUbicacion);
+ilong.addEventListener('click',obtenerUbicacion);
+fechador.addEventListener('click',obtenerFecha);
 
 
 function obtenerUbicacion(){
 
-    if(!alertInfo){
-        navigator.permissions.query({name:'geolocation'})
-        .then(function(result){
-            if(result.state === 'granted'){
-                navigator.geolocation.getCurrentPosition(success,error);
-                alertInfo = true;
-            }
-            else if(result.state === 'prompt'){
-                info();
-                navigator.geolocation.getCurrentPosition(success,error);
-                alertInfo = false;
-            }
-            else if(result.state === 'denied'){
-                error(error);
-                alertInfo = false;
-            }
-        });
-    
-    function info(){
-        generateAlert("info", "Necesitamos acceder a tu ubicacion para completar el formulario. Por favor, permita el acceso !");
-    }
+if(!campos.alertInfo){
+    navigator.permissions.query({name:'geolocation'})
+    .then(function(result){
+        if(result.state === 'granted'){
+            success();
+        }
+        else if(result.state === 'prompt'){
+            info();
 
-    function success(position){
-        let latitude = position.coords.latitude;
-        let longitude = position.coords.longitude;
-    
-            ilat.value = `${latitude}`;
-            validarCampo(expresiones.latitud, ilat, 'latitud');
+        }
+        else if(result.state === 'denied'){
+            error(error);
 
-            ilong.value = `${longitude}`;
-            validarCampo(expresiones.longitud, ilong, 'longitud');
-            // Validacion y posterior desactivacion de los valores latitud y longitud
-            disableInput();
-                generateAlert("success","Ubicacion obtenida con exito");
-    }
+        }
+    });
+
+function info(){
+    navigator.geolocation.getCurrentPosition(success,error);
+    generateAlert("info", "Necesitamos acceder a tu ubicacion para completar el formulario. Por favor, permita el acceso !");
+    campos.alertInfo = false;
 }
 
-    function error(error){
-        let msg = "";
-        switch(error.code){
-            case error.PERMISSION_DENIED:
-                msg = "No se permitio el acceso a la ubicacion. Active los permisos para continuar !";
-                break;
-            case error.POSITION_UNAVAILABLE:
-                msg = "No se pudo obtener su ubicacion. Por favor intente nuevamente !";
-                break;
-            case error.TIMEOUT:
-                msg = "La solicitud de ubicacion tardo demasiado. Intentelo nuevamente !";
-                break;
-            default:
-                msg = "Ocurrio un error inesperado al obtener su ubicacion.";
-        }
-            generateAlert("error", msg);
+function success(position){
+    let latitude = position.coords.latitude;
+    let longitude = position.coords.longitude;
+
+        ilat.value = `${latitude}`;
+        validarCampo(expresiones.latitud, ilat, 'latitud');
+
+        ilong.value = `${longitude}`;
+        validarCampo(expresiones.longitud, ilong, 'longitud');
+
+        generateAlert("success","Ubicacion obtenida con exito");
+
+        // Asignar solo lectura a los campos ya completados y validarlos
+        ilat.readOnly = true;
+        ilong.readOnly = true;
+        campos.latitudCargada = true;
+        campos.longitudCargada = true;
+        campos.alertInfo = true;
+}
+}
+
+function error(error){
+    let msg = "";
+    switch(error.code){
+        case error.PERMISSION_DENIED:
+            msg = "No se permitio el acceso a la ubicacion. Active los permisos para continuar !";
+            break;
+        case error.POSITION_UNAVAILABLE:
+            msg = "No se pudo obtener su ubicacion. Por favor intente nuevamente !";
+            break;
+        case error.TIMEOUT:
+            msg = "La solicitud de ubicacion tardo demasiado. Intentelo nuevamente !";
+            break;
+        default:
+            msg = "Ocurrio un error inesperado al obtener su ubicacion.";
     }
+        generateAlert("error", msg);
+        campos.alertInfo = false;
+
+}
 }
 
 function validarFormulario(e){
@@ -210,16 +223,23 @@ function validarCampo(expresion,input,campo){
     }
 }
 
-function disableInput(){
-    ilat.readOnly = true;
-    ilong.readOnly= true;
-}
+function resetForm(){
+    // Reiniciar el formulario
+    form.reset();
 
-function resetInput(){
-    ilat.value = "";
-    ilong.value = "";    
-    ilat.readOnly = false;
-    ilong.readOnly= false;
+    // Reinicio los estados de los campos y sus estilos
+    document.querySelectorAll('.formulario__grupo-correcto').forEach((icono) => {
+        icono.classList.remove('formulario__grupo-correcto');
+        icono.classList.remove('formulario__grupo-incorrecto');
+        });
+
+    // Ocultar el mensaje de error si es que estubiera activo
+    document.getElementById('formulario__mensaje').classList.remove('formulario__mensaje-activo');
+
+    // Reinicio de los estados de validacion
+    for(let campo in campos){
+        campos[campo] = false;
+    } 
 }
 
 function generateAlert(resultado, mensaje = null){
@@ -295,4 +315,6 @@ function generateAlert(resultado, mensaje = null){
 function obtenerFecha(){
     let fecha = new Date();
     fechador.value = fecha.toISOString().split('T')[0];
+    fechador.readOnly = true;
+    campos.fechaCargada = true;
 }
