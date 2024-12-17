@@ -1,37 +1,60 @@
 <?php
-    error_log($_SERVER['REQUEST_METHOD']);
+include 'conexion.php';
 
-    // Verificar que la solicitud sea POST
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-        // recibir los datos del formulario
-        $nombre = $_POST['nombre'];
-        $apellido = $_POST['apellido'];
-        $dni = $_POST['dni'];
-        $tipo_residuo = $_POST['residuo'];
-        $lat = $_POST['latitud'];
-        $long = $_POST['longitud'];
-        $fecha = $_POST['fecha'];
-        $accesibilidad = $_POST['acceso'];
-        $text_area = $_POST['texto'];
-    }else{
-        http_response_code(405); // Devolver 405 si no es POST
-        echo "Método no permitido";
-    }
+error_log($_SERVER['REQUEST_METHOD']);
 
-    // Carga de los datos recibidos en un arreglo
-    $respuesta = [
-        'nombre' => $nombre,
-        'apellido' => $apellido,
-        'dni' => $dni,
-        'tipo_residuo' => $tipo_residuo,
-        'lat' => $lat,
-        'long' => $long,
-        'fecha' => $fecha,
-        'accesibilidad' => $accesibilidad,
-        'texto' => $text_area
+// Verificar que la solicitud sea POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Definir los campos esperados y sus filtros
+    $campos = [
+        "nombre" => FILTER_SANITIZE_STRING,
+        "apellido" => FILTER_SANITIZE_STRING,
+        "dni" => FILTER_SANITIZE_NUMBER_INT,
+        "residuo" => FILTER_SANITIZE_STRING,
+        "latitud" => FILTER_VALIDATE_FLOAT,
+        "longitud" => FILTER_VALIDATE_FLOAT,
+        "fecha" => FILTER_SANITIZE_STRING,
+        "acceso" => FILTER_SANITIZE_STRING,
+        "texto" => FILTER_SANITIZE_STRING,
     ];
 
-    // Devolver los datos en formato JSON
+    // Aplicar los filtros dinámicamente
+    $datos = filter_input_array(INPUT_POST, $campos);
+
+    // Validar campos obligatorios
+    $campos_obligatorios = ["nombre", "apellido","residuo", "dni", "latitud", "longitud", "fecha", "acceso","texto"];
+    foreach ($campos_obligatorios as $campo) {
+        if (empty($datos[$campo])) {
+            http_response_code(400);
+            echo json_encode(["error" => "El campo '$campo' es obligatorio o inválido"]);
+            exit;
+        }
+    }
+
+    // Preparar respuesta
+    $respuesta = [
+        "nombre" => $datos["nombre"],
+        "apellido" => $datos["apellido"],
+        "dni" => $datos["dni"],
+        "tipo_residuo" => $datos["residuo"],
+        "lat" => $datos["latitud"],
+        "long" => $datos["longitud"],
+        "fecha" => $datos["fecha"],
+        "accesibilidad" => $datos["acceso"],
+        "texto" => $datos["texto"]
+    ];
+
+    // Enviar respuesta en JSON
     header('Content-Type: application/json');
     echo json_encode($respuesta);
+
+} else {
+    // Método no permitido
+    http_response_code(405);
+    echo "Método no permitido";
+}
+
+
+
 ?>
