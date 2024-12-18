@@ -54,14 +54,11 @@ let formdata;
         fetch('../php/recepcion-datos.php',{
             method: 'POST',
             body: formdata
-        })
-        .then(response => response.json())
-        .then(data =>{
-            // Generacion del alerta de envio correcto y reinicio del formulario
-            generateAlert('success');
+
+        }).then(function(response){
+            return response.json();
+        }).then(function(data){
             console.log(data);
-            // Reinicio del formulario y los estados
-            resetForm();
         })
         .catch((error)=>{
             generateAlert('error',error);
