@@ -3,8 +3,8 @@
 $host = 'localhost';
 $port = '3306'; // Puerto encontrado
 $dbname = 'mapas_dinamicos';
-$username = 'root';
-$password = '';
+$username = 'lion-sama';
+$password = 'tigerh1';
 
 try {
     // Crear la conexión PDO

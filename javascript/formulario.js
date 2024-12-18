@@ -9,9 +9,6 @@ let inputs = document.querySelectorAll('#formulario input,select,textarea');
 let btnAlert = document.getElementById('btn-submit');
 let fechador = document.getElementById("fecha");
 
-// Variable para cargar los datos del formulario
-let formdata;
-
     const expresiones = {
 	    nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
         apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
@@ -48,17 +45,23 @@ let formdata;
 
     if(Object.values(campos).every((campo)=>campo)){
         // Creacion del objeto de Formulario para su envio
-        formdata = new FormData(form);
+        const formdata = new FormData(form);
         
+         // Verificar qué datos están en FormData
+         for (const [key, value] of formdata.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+
         // Envio de los datos
-        fetch('../php/recepcion-datos.php',{
+        fetch('../php/recepcion-datos.php', {
             method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
             body: formdata
 
-        }).then(function(response){
-            return response.json();
-        }).then(function(data){
+        }).then(res => res.json())
+        .then(data=>{
             console.log(data);
+            generateAlert("success");
         })
         .catch((error)=>{
             generateAlert('error',error);
