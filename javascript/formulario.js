@@ -16,9 +16,9 @@ let formdata;
 	    nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
         apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
         dni: /^\d{8}$/, //8 numeros.
-        texto: /^[a-zA-ZÀ-ÿ0-9\s.,;!?(){}[\]'"-]{1,250}$/,  // Permite letras, números, espacios y signos de puntuación
-        residuo: /^(Microbasural|Macrobasural|Basural Municipal)$/, // Tres valores posibles.
-        acceso: /^(facil|complicado|dificil)$/, // Tres valores posibles.
+        informe: /^[a-zA-ZÀ-ÿ0-9\s.,;!?(){}[\]'"-]{1,250}$/,  // Permite letras, números, espacios y signos de puntuación
+        tipo_residuo: /^(Microbasural|Macrobasural|Basural Municipal)$/, // Tres valores posibles.
+        tipo_acceso: /^(facil|complicado|dificil)$/, // Tres valores posibles.
         fecha: /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/,  //Validaciones para la fecha.
         latitud: /^-?([1-8]?[0-9](\.\d{1,6})?|90(\.0{1,8})?)$/,  // Latitud entre -90 y 90, hasta 6 decimales
         longitud: /^-?((1[0-7][0-9]|[1-9]?[0-9])(\.\d{1,8})?|180(\.0{1,6})?)$/,  // Longitud entre -180 y 180, hasta 6 decimales
@@ -29,11 +29,11 @@ let formdata;
         nombre: false,
         apellido: false,
         dni: false,
-        texto: false,
+        informe: false,
         latitud:false,
         longitud:false,
-        residuo:false,
-        acceso:false,
+        tipo_residuo:false,
+        tipo_acceso:false,
         fecha: false,
         // creacion de los campos bandera para el control de flujo
         alertInfo: false,
@@ -185,17 +185,17 @@ function validarFormulario(e){
         case "dni":
             validarCampo(expresiones.dni,e.target,'dni');
         break;
-        case "texto":
-            validarCampo(expresiones.texto,e.target,'texto');
+        case "informe":
+            validarCampo(expresiones.informe,e.target,'informe');
         break;
-        case "residuo":
-            validarCampo(expresiones.residuo,e.target,'residuo');
+        case "tipo_residuo":
+            validarCampo(expresiones.tipo_residuo,e.target,'tipo_residuo');
         break;
         case "fecha":
             validarCampo(expresiones.fecha,e.target,'fecha');
         break;
-        case "acceso":
-            validarCampo(expresiones.acceso,e.target,'acceso');
+        case "tipo_acceso":
+            validarCampo(expresiones.tipo_acceso,e.target,'tipo_acceso');
         break;
     }
     // Ocultar mensaje de advertencia si todos los campos son válidos
