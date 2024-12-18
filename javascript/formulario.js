@@ -60,7 +60,6 @@ let formdata;
             // Generacion del alerta de envio correcto y reinicio del formulario
             generateAlert('success');
             console.log(data);
-
             // Reinicio del formulario y los estados
             resetForm();
         })
