@@ -55,7 +55,6 @@ let fechador = document.getElementById("fecha");
         // Envio de los datos
         fetch('../php/recepcion-datos.php', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
             body: formdata
 
         }).then(res => res.json())
