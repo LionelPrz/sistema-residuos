@@ -1,36 +1,21 @@
 <?php
+// se que esta mal pero no me dejan opcion alguna
+error_reporting(E_ALL ^ E_WARNING);
+
 // Incluir conexión a la base de datos
 include 'conexion.php';
-session_start();
+$datos = json_decode(file_get_contents('php://input'), true);
+$nombre = $datos['nombre'];
+$apellido = $datos['apellido'];
+$respuesta = json_encode($nombre);
+$exito = 'Insercion Exitosa Master';
 
+$sql = "INSERT INTO prueba(prueba_id,nombre)
+    VALUES ('0','$apellido')";
 
-
-if($_SERVER['REQUEST_METHOD'] == 'POST'){
-    $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $dni = $_POST['dni'];
-    $tipo_residuo = $_POST['tipo_residuo'];
-    $fecha = $_POST['fecha'];
-    $latitud = $_POST['latitud'];
-    $longitud = $_POST['longitud'];
-    $informe = $_POST['informe'];
-
-    $campos = [
-      'nombre' => $nombre,
-      'apellido' => $apellido,
-      'dni' => $dni,
-      'tipo_residuo' => $tipo_residuo,
-      'fecha' => $fecha,
-      'latitud' => $latitud,
-      'longitud' => $longitud,
-      'informe' => $informe
-    ];
-
-    echo'$campos';
-    // Respuesta en formato JSON
-echo json_encode($campos);
+if($pdo->query($sql)=== TRUE){
+  echo json_encode($exito);
 }else{
-    echo json_encode("No se ha enviado un POST");
+  echo json_encode("Error");
 }
-
 ?>

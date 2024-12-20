@@ -45,22 +45,23 @@ let fechador = document.getElementById("fecha");
 
     if(Object.values(campos).every((campo)=>campo)){
         // Creacion del objeto de Formulario para su envio
-        const formdata = new FormData(form);
-        
-         // Verificar qué datos están en FormData
-         for (const [key, value] of formdata.entries()) {
-            console.log(`${key}: ${value}`);
-        }
+        const formulario = new FormData(form);
+        const res = Object.fromEntries(formulario);
+        const payload = JSON.stringify(res);
 
         // Envio de los datos
-        fetch('../php/recepcion-datos.php', {
+        fetch('php/recepcion-datos.php', {
             method: 'POST',
-            body: formdata
+            body: payload,
+            headers:{
+                'Contente-Type': 'application/json',
+            }
 
         }).then(res => res.json())
         .then(data=>{
-            console.log(data);
+            console.log("si funciona pibe");
             generateAlert("success");
+            console.log(data);
         })
         .catch((error)=>{
             generateAlert('error',error);
